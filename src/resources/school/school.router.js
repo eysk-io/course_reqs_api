@@ -1,5 +1,5 @@
 import { Router } from "express";
-import schoolCrudControllers from "../../utils/school.crud";
+import schoolCrudControllers from "./school.controllers";
 
 const router = Router();
 
