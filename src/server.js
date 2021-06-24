@@ -4,7 +4,7 @@ import morgan from "morgan";
 import config from "./config";
 import cors from "cors";
 import { connect } from "./utils/db";
-import schoolRouter from "./resources/school.router";
+import router from "./resources/router";
 
 export const app = express();
 
@@ -15,7 +15,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use("/api/school", schoolRouter);
+app.use("/api/school", router);
 
 export const start = async () => {
   try {
