@@ -4,7 +4,9 @@ import morgan from "morgan";
 import config from "./config";
 import cors from "cors";
 import { connect } from "./utils/db";
-import schoolRouter from "./resources/school/school.router";
+import schoolRouterUnprotected from "./resources/school/school.router.unprotected";
+import schoolRouterProtected from "./resources/school/school.router.protected";
+import { signup, signin, protect } from "./utils/auth";
 
 export const app = express();
 
@@ -15,7 +17,11 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use("/api/school", schoolRouter);
+app.post("/signup", signup);
+app.post("/signin", signin);
+
+app.use("/api/school", schoolRouterUnprotected);
+app.use("/api/school", protect, schoolRouterProtected);
 
 export const start = async () => {
   try {
