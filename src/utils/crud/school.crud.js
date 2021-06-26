@@ -1,8 +1,7 @@
 export const getSchool = model => async (req, res) => {
-    const schoolName = req.params.name;
     try {
         const doc = await model
-            .findOne({ name: schoolName })
+            .findOne({ name: req.params.schoolName })
             .lean()
             .exec();
 
@@ -12,30 +11,27 @@ export const getSchool = model => async (req, res) => {
         res.status(200).json({ data: doc });
     } catch (e) {
         console.error(e);
-        res.status(400).end();
     }
 }
 
 export const getAllSchools = model => async (req, res) => {
     try {
         const docs = await model
-            .find({})
+            .find()
             .lean()
             .exec();
         res.status(200).json({ data: docs });
     } catch (e) {
         console.error(e);
-        res.status(400).end();
     }
 }
 
 export const createSchool = model => async (req, res) => {
     try {
-        const doc = await model.create({ ...req.body });
+        const doc = await model.create({ name: req.body.name });
         res.status(201).json({ data: doc });
     } catch (e) {
         console.error(e);
-        res.status(400).end();
     }
 }
 
@@ -44,7 +40,7 @@ export const updateSchool = model => async (req, res) => {
         const updatedSchool = await model
             .findOneAndUpdate(
                 {
-                    _id: req.params.id
+                    name: req.params.schoolName
                 },
                 req.body,
                 { new: true }
@@ -58,14 +54,13 @@ export const updateSchool = model => async (req, res) => {
         res.status(200).json({ data: updatedSchool });
     } catch (e) {
         console.error(e);
-        res.status(400).send();
     }
 }
 
 export const removeSchool = model => async (req, res) => {
     try {
         const removedSchool = await model.findOneAndRemove({
-            name: req.params.name
+            name: req.params.schoolName
         });
 
         if (!removedSchool) {
@@ -75,7 +70,6 @@ export const removeSchool = model => async (req, res) => {
         return res.status(200).json({ data: removedSchool });
     } catch (e) {
         console.error(e);
-        res.status(400).end();
     }
 }
 
