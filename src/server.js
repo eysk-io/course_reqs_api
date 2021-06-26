@@ -23,6 +23,10 @@ app.post("/signin", signin);
 app.use("/api/school", schoolRouterUnprotected);
 app.use("/api/school", protect, schoolRouterProtected);
 
+app.use((error, req, res, next) => {
+  return res.status(500).json({ error: error.toString() });
+});
+
 export const start = async () => {
   try {
     await connect();
