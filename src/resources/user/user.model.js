@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
     {
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-userSchema.pre("save", (next) => {
+userSchema.pre("save", function (next) {
     if (!this.isModified("password")) {
         return next();
     }
@@ -31,7 +31,7 @@ userSchema.pre("save", (next) => {
     });
 });
 
-userSchema.methods.checkPassword = (password) => {
+userSchema.methods.checkPassword = function (password) {
     const passwordHash = this.password;
     return new Promise((resolve, reject) => {
         bcrypt.compare(password, passwordHash, (err, same) => {
@@ -43,4 +43,4 @@ userSchema.methods.checkPassword = (password) => {
     })
 }
 
-export const User = mongoose.model('user', userSchema);
+export const User = mongoose.model("user", userSchema);

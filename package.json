@@ -50,5 +50,15 @@
     "prettier": "^1.15.2",
     "rimraf": "^2.6.2",
     "supertest": "^3.3.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "<rootDir>/test-db-setup.js",
+    "testPathIgnorePatterns": [
+      "dist/"
+    ],
+    "restoreMocks": true
   }
 }
