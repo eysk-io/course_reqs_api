@@ -87,6 +87,28 @@ describe("school crud functions", () => {
             await createSchool(School)(req, res);
             expect.assertions(2);
         });
+        test("400 trying to create a school that already exists", async () => {
+            await School.create({ name: "UBC" });
+            const body = {
+                name: "UBC"
+            }
+
+            const req = {
+                body
+            }
+
+            const res = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await createSchool(School)(req, res);
+            expect.assertions(3);
+        });
     });
     describe("updateSchool", async () => {
         test("update an existing school", async () => {
