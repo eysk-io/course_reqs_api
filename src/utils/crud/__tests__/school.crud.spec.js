@@ -1,6 +1,5 @@
 import { getSchool, getAllSchools, createSchool, updateSchool, removeSchool } from "../school.crud";
 import { School } from "../../../resources/school/school.model";
-import mongoose from "mongoose";
 
 describe("school crud functions", () => {
     describe("getSchool", async () => {
