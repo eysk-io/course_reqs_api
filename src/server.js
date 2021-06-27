@@ -6,6 +6,8 @@ import cors from "cors";
 import { connect } from "./utils/db";
 import schoolRouterUnprotected from "./resources/school/school.router.unprotected";
 import schoolRouterProtected from "./resources/school/school.router.protected";
+import courseRouterUnprotected from "./resources/course/course.router.unprotected";
+import courseRouterProtected from "./resources/course/course.router.protected";
 import { signup, signin, protect } from "./utils/auth";
 
 export const app = express();
@@ -22,6 +24,9 @@ app.post("/signin", signin);
 
 app.use("/api/school", schoolRouterUnprotected);
 app.use("/api/school", protect, schoolRouterProtected);
+
+app.use("/api/course", courseRouterUnprotected);
+app.use("/api/course", protect, courseRouterProtected);
 
 app.use((error, req, res, next) => {
   return res.status(500).json({ error: error.toString() });
