@@ -26,8 +26,8 @@ const courseSchema = new mongoose.Schema(
             maxlength: 2
         },
         // for both pre- and co-requisites, can have either of the following structures:
-        // [String] -> i.e. ["CPSC 310", "CPSC 221"]
-        // {"oneOf": [String]} -> i.e. {oneOf: ["CPSC 310", "CPSC 221"]}
+        // [String] -> i.e. ["CPSC 310", "CPSC 221", ...]
+        // [{"oneOf": [String]}] -> i.e. [{oneOf: ["CPSC 310", "CPSC 221"]}, ...]
         preRequisites: {
             type: [mongoose.Mixed],
             required: true
