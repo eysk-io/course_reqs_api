@@ -305,4 +305,137 @@ describe("course crud functions", async () => {
             expect.assertions(2);
         });
     });
+    describe("updateCourse", async () => {
+        test("update a course's information", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 5,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: schoolModel.name,
+                    courseName: "CPSC",
+                    courseNumber: 110
+                },
+                body: {
+                    name: "CPSC",
+                    number: 110,
+                    credits: 4,
+                    preRequisites: [],
+                    coRequisites: []
+                }
+            };
+            const expectedCourse = {
+                name: "CPSC",
+                number: 110,
+                credits: 5,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.name.toString()).toEqual(expectedCourse.name.toString());
+                    expect(result.data.number).toEqual(expectedCourse.number);
+                    expect(result.data.credits).toEqual(expectedCourse.credits);
+                    expect(result.data.preRequisites).toHaveLength(0);
+                    expect(result.data.coRequisites).toHaveLength(0);
+                }
+            }
+            await updateCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.credits).toEqual(req.body.credits);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(8);
+        });
+        test("400 if school not found", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: "SFU",
+                    courseName: "CPSC",
+                    courseNumber: 110
+                },
+                body: {
+                    name: "CPSC",
+                    number: 110,
+                    credits: 4,
+                    preRequisites: [],
+                    coRequisites: []
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await updateCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("400 if course not found", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: schoolModel.name,
+                    courseName: "CPSC",
+                    courseNumber: 111
+                },
+                body: {
+                    name: "CPSC",
+                    number: 110,
+                    credits: 4,
+                    preRequisites: [],
+                    coRequisites: []
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await updateCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+    });
 });

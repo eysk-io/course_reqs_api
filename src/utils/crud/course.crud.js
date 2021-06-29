@@ -80,7 +80,35 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
 }
 
 export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
-    //TODO:
+    try {
+        const schoolName = req.params.school;
+        const schoolDoc = await schoolModel
+            .findOne({ name: schoolName })
+            .lean()
+            .exec();
+        if (!schoolDoc) {
+            return res.status(400).end();
+        }
+        const schoolId = schoolDoc._id;
+        const courseName = req.params.courseName;
+        const courseNumber = req.params.courseNumber;
+        const doc = await courseModel
+            .findOneAndUpdate({
+                school: schoolId,
+                name: courseName,
+                number: courseNumber
+            }, { ...req.body }
+            )
+            .lean()
+            .exec();
+        if (!doc) {
+            return res.status(400).end();
+        }
+        return res.status(200).json({ data: doc });
+    } catch (e) {
+        console.error(e);
+        res.status(400).end();
+    }
 }
 
 export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
