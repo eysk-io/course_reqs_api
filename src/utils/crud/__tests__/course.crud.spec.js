@@ -51,7 +51,7 @@ describe("course crud functions", async () => {
             await createCourse(Course, School)(req, res);
             expect.assertions(6);
         });
-        test("400 for school that doesn't exist", async () => {
+        test("400 if school not found", async () => {
             const req = {
                 params: {
                     school: "UBC"
