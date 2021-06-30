@@ -105,7 +105,7 @@ export const cpen221 = {
     coRequisites: []
 };
 
-export const apsc221 = {
+export const apsc160 = {
     name: "APSC",
     number: 160,
     credits: 3,
@@ -1005,14 +1005,6 @@ export const mech220 = {
     coRequisites: [
         "MECH 221"
     ]
-}
-
-export const apsc160 = {
-    name: "APSC",
-    number: 160,
-    credits: 3,
-    preRequisites: [],
-    coRequisites: []
 }
 
 export const phys170 = {
