@@ -37,14 +37,14 @@ export const createCourse = (courseModel, schoolModel) => async (req, res) => {
 }
 
 export const getAllCoursesByName = (courseModel, schoolModel) => async (req, res) => {
-    //TODO:
+    // TODO:
 }
 
 export const removeCoursesByName = (courseModel, schoolModel) => async (req, res) => {
-    //TODO:
+    // TODO:
 }
 
-//TODO: Must complete co-reqs and "oneOf" cases
+// TODO: Must complete co-reqs and "oneOf" cases
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
@@ -115,7 +115,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
 }
 
 export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
-    //TODO:
+    // TODO:
 }
 
 export const courseCrudControllers = (courseModel, schoolModel) => ({
