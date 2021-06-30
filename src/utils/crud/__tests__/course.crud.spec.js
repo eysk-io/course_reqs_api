@@ -304,6 +304,217 @@ describe("course crud functions", async () => {
             await getCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("find all courses by school with oneOf pre-reqs", async () => {
+            const school = await School.create({ name: "UBC" });
+            const cpsc210 = await Course.create({
+                name: "CPSC",
+                number: 210,
+                school: school._id,
+                credits: 4,
+                preRequisites: [
+                    {
+                        oneOf: [
+                            "CPSC 110", "CPSC 107"
+                        ]
+                    }
+                ],
+                coRequisites: []
+            });
+            const cpsc110 = await Course.create({
+                name: "CPSC",
+                number: 110,
+                school: school._id,
+                credits: 4,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const cpsc107 = await Course.create({
+                name: "CPSC",
+                number: 107,
+                school: school._id,
+                credits: 3,
+                preRequisites: ["CPSC 103"],
+                coRequisites: []
+            });
+            const cpsc103 = await Course.create({
+                name: "CPSC",
+                number: 103,
+                school: school._id,
+                credits: 3,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const expectedCourse = {
+                name: "CPSC",
+                number: 210,
+                school: school._id,
+                credits: 4,
+                preRequisites: [
+                    {
+                        oneOf: [
+                            {
+                                name: "CPSC",
+                                number: 110,
+                                school: school._id,
+                                credits: 4,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: cpsc110._id
+                            },
+                            {
+                                name: "CPSC",
+                                number: 107,
+                                school: school._id,
+                                credits: 3,
+                                preRequisites: [
+                                    {
+                                        name: "CPSC",
+                                        number: 103,
+                                        school: school._id,
+                                        credits: 3,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: cpsc103._id
+                                    }
+                                ],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: cpsc107._id
+                            }
+                        ]
+                    }
+                ],
+                coRequisites: [],
+                __v: 0,
+                _id: cpsc210._id
+            };
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: cpsc210.name,
+                    courseNumber: cpsc210.number
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school with co-reqs", async () => {
+            const school = await School.create({ name: "UBC" });
+            const phys158 = await Course.create({
+                name: "PHYS",
+                number: 158,
+                credits: 3,
+                school: school._id,
+                preRequisites: ["PHYS 157"],
+                coRequisites: [
+                    {
+                        oneOf: [
+                            "MATH 101",
+                            "MATH 103"
+                        ]
+                    }
+                ]
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const expectedCourse = {
+                name: "PHYS",
+                number: 158,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        name: "PHYS",
+                        number: 157,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: phys157._id
+                    },
+                ],
+                coRequisites: [
+                    {
+                        oneOf: [
+                            {
+                                name: "MATH",
+                                number: 101,
+                                school: school._id,
+                                credits: 3,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: math101._id
+                            },
+                            {
+                                name: "MATH",
+                                number: 103,
+                                school: school._id,
+                                credits: 3,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: math103._id
+                            },
+                        ]
+                    }
+                ],
+                __v: 0,
+                _id: phys158._id
+            };
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: phys158.name,
+                    courseNumber: phys158.number
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
     });
     describe("updateCourse", async () => {
         test("update a course's information", async () => {

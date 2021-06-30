@@ -72,6 +72,9 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
         for (let i = 0; i < doc.preRequisites.length; i++) {
             doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i]);
         }
+        for (let i = 0; i < doc.coRequisites.length; i++) {
+            doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
+        }
         return res.status(200).json({ data: doc });
     } catch (e) {
         console.error(e);
@@ -126,6 +129,19 @@ export const courseCrudControllers = (courseModel, schoolModel) => ({
 });
 
 const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseRequisite) => {
+    if (
+        typeof (courseRequisite) !== "string" &&
+        Object.keys(courseRequisite).includes("oneOf")
+    ) {
+        let oneOfListLength = courseRequisite.oneOf.length
+        let oneOfObj = {
+            oneOf: []
+        };
+        for (let i = 0; i < oneOfListLength; i++) {
+            oneOfObj.oneOf[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.oneOf[i]);
+        }
+        return oneOfObj;
+    }
     const fullName = courseRequisite.split(/[ ]+/);
     const courseName = fullName[0];
     const courseNumber = parseInt(fullName[1]);
@@ -139,6 +155,9 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
         .exec();
     for (let i = 0; i < doc.preRequisites.length; i++) {
         doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i]);
+    }
+    for (let i = 0; i < doc.coRequisites.length; i++) {
+        doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
     }
     return doc;
 }
