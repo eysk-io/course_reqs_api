@@ -23,6 +23,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 110,
                     credits: 4,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     preRequisites: [],
                     coRequisites: []
                 }
@@ -31,6 +33,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 110,
                 credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -60,6 +64,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 110,
                     credits: 4,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     preRequisites: [],
                     coRequisites: []
                 }
@@ -85,6 +91,8 @@ describe("course crud functions", async () => {
                 number: 110,
                 school: school._id,
                 credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 preRequisites: [],
                 coRequisites: []
             });
@@ -110,6 +118,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 110,
                 credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: mongoose.Types.ObjectId(),
                 preRequisites: [],
                 coRequisites: []
@@ -156,6 +166,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 107,
                 school: school._id,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 credits: 3,
                 preRequisites: ["CPSC 103"],
                 coRequisites: []
@@ -165,6 +177,8 @@ describe("course crud functions", async () => {
                 number: 103,
                 school: school._id,
                 credits: 3,
+                title: "Introduction to Systematic Program Design",
+                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                 preRequisites: [],
                 coRequisites: []
             })
@@ -173,11 +187,15 @@ describe("course crud functions", async () => {
                 number: 107,
                 school: school._id,
                 credits: 3,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 preRequisites: [
                     {
                         name: "CPSC",
                         number: 103,
                         school: school._id,
+                        title: "Introduction to Systematic Program Design",
+                        description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
@@ -214,6 +232,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 340,
                 school: school._id,
+                title: "Machine Learning and Data Mining",
+                description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
                 credits: 3,
                 preRequisites: ["CPSC 221"],
                 coRequisites: []
@@ -222,6 +242,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 221,
                 school: school._id,
+                title: "Basic Algorithms and Data Structures",
+                description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
                 credits: 4,
                 preRequisites: ["CPSC 210"],
                 coRequisites: []
@@ -230,6 +252,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 210,
                 school: school._id,
+                title: "Software Construction",
+                description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
                 credits: 4,
                 preRequisites: ["CPSC 110"],
                 coRequisites: []
@@ -238,6 +262,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 110,
                 school: school._id,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 preRequisites: [],
                 coRequisites: []
@@ -246,23 +272,31 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 340,
                 school: school._id,
+                title: "Machine Learning and Data Mining",
+                description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
                 credits: 3,
                 preRequisites: [
                     {
                         name: "CPSC",
                         number: 221,
                         school: school._id,
+                        title: "Basic Algorithms and Data Structures",
+                        description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
                         credits: 4,
                         preRequisites: [
                             {
                                 name: "CPSC",
                                 number: 210,
                                 school: school._id,
+                                title: "Software Construction",
+                                description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
                                 credits: 4,
                                 preRequisites: [
                                     {
                                         name: "CPSC",
                                         number: 110,
+                                        title: "Computation, Programs, and Programming",
+                                        description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                         school: school._id,
                                         credits: 4,
                                         preRequisites: [],
@@ -310,6 +344,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 210,
                 school: school._id,
+                title: "Software Construction",
+                description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
                 credits: 4,
                 preRequisites: [
                     {
@@ -323,6 +359,8 @@ describe("course crud functions", async () => {
             const cpsc110 = await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: school._id,
                 credits: 4,
                 preRequisites: [],
@@ -332,6 +370,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 107,
                 school: school._id,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 credits: 3,
                 preRequisites: ["CPSC 103"],
                 coRequisites: []
@@ -340,6 +380,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 103,
                 school: school._id,
+                title: "Introduction to Systematic Program Design",
+                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                 credits: 3,
                 preRequisites: [],
                 coRequisites: []
@@ -348,6 +390,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 210,
                 school: school._id,
+                title: "Software Construction",
+                description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
                 credits: 4,
                 preRequisites: [
                     {
@@ -355,6 +399,8 @@ describe("course crud functions", async () => {
                             {
                                 name: "CPSC",
                                 number: 110,
+                                title: "Computation, Programs, and Programming",
+                                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                 school: school._id,
                                 credits: 4,
                                 preRequisites: [],
@@ -365,6 +411,8 @@ describe("course crud functions", async () => {
                             {
                                 name: "CPSC",
                                 number: 107,
+                                title: "Systematic Program Design",
+                                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                                 school: school._id,
                                 credits: 3,
                                 preRequisites: [
@@ -372,6 +420,8 @@ describe("course crud functions", async () => {
                                         name: "CPSC",
                                         number: 103,
                                         school: school._id,
+                                        title: "Introduction to Systematic Program Design",
+                                        description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                                         credits: 3,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -416,6 +466,8 @@ describe("course crud functions", async () => {
                 number: 158,
                 credits: 3,
                 school: school._id,
+                title: "Introductory Physics for Engineers II",
+                description: "Electricity and magnetism, DC and AC circuits, optics. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 preRequisites: ["PHYS 157"],
                 coRequisites: [
                     {
@@ -431,6 +483,8 @@ describe("course crud functions", async () => {
                 number: 157,
                 credits: 3,
                 school: school._id,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: []
             });
@@ -439,6 +493,8 @@ describe("course crud functions", async () => {
                 number: 101,
                 credits: 3,
                 school: school._id,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: []
             });
@@ -447,6 +503,8 @@ describe("course crud functions", async () => {
                 number: 103,
                 credits: 3,
                 school: school._id,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: []
             });
@@ -454,12 +512,16 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 158,
                 school: school._id,
+                title: "Introductory Physics for Engineers II",
+                description: "Electricity and magnetism, DC and AC circuits, optics. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 credits: 3,
                 preRequisites: [
                     {
                         name: "PHYS",
                         number: 157,
                         school: school._id,
+                        title: "Introductory Physics for Engineers I",
+                        description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
@@ -475,6 +537,8 @@ describe("course crud functions", async () => {
                                 number: 101,
                                 school: school._id,
                                 credits: 3,
+                                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 preRequisites: [],
                                 coRequisites: [],
                                 __v: 0,
@@ -485,6 +549,8 @@ describe("course crud functions", async () => {
                                 number: 103,
                                 school: school._id,
                                 credits: 3,
+                                title: "Integral Calculus with Applications to Life Sciences",
+                                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 preRequisites: [],
                                 coRequisites: [],
                                 __v: 0,
@@ -521,6 +587,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -542,6 +610,8 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 157,
                 credits: 3,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -550,6 +620,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 101,
                 credits: 3,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -558,6 +630,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 103,
                 credits: 3,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -573,6 +647,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 school: school._id,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
                 preRequisites: [
                     {
@@ -583,6 +659,8 @@ describe("course crud functions", async () => {
                                 name: "PHYS",
                                 number: 157,
                                 credits: 3,
+                                title: "Introductory Physics for Engineers I",
+                                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
@@ -596,6 +674,8 @@ describe("course crud functions", async () => {
                         number: 101,
                         credits: 3,
                         school: school._id,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -606,6 +686,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         credits: 3,
                         school: school._id,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -617,6 +699,8 @@ describe("course crud functions", async () => {
                         name: "MATH",
                         number: 101,
                         school: school._id,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
@@ -627,6 +711,8 @@ describe("course crud functions", async () => {
                         name: "MATH",
                         number: 103,
                         school: school._id,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
@@ -655,6 +741,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -680,6 +768,8 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 157,
                 credits: 3,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -688,6 +778,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 101,
                 credits: 3,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -696,6 +788,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 103,
                 credits: 3,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -711,6 +805,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 school: school._id,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
                 preRequisites: [
                     {
@@ -723,6 +819,8 @@ describe("course crud functions", async () => {
                                         name: "PHYS",
                                         number: 157,
                                         credits: 3,
+                                        title: "Introductory Physics for Engineers I",
+                                        description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -735,6 +833,8 @@ describe("course crud functions", async () => {
                                 name: "MATH",
                                 number: 101,
                                 credits: 3,
+                                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
@@ -747,6 +847,8 @@ describe("course crud functions", async () => {
                         name: "MATH",
                         number: 103,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         school: school._id,
                         preRequisites: [],
                         coRequisites: [],
@@ -758,6 +860,8 @@ describe("course crud functions", async () => {
                     {
                         name: "MATH",
                         number: 101,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         school: school._id,
                         credits: 3,
                         preRequisites: [],
@@ -770,6 +874,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -797,6 +903,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -822,6 +930,8 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 157,
                 credits: 3,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -830,6 +940,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 101,
                 credits: 3,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -837,6 +949,8 @@ describe("course crud functions", async () => {
             const math103 = await Course.create({
                 name: "MATH",
                 number: 103,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
                 school: school._id,
                 preRequisites: [],
@@ -854,6 +968,8 @@ describe("course crud functions", async () => {
                 number: 221,
                 school: school._id,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [
                     {
                         scoreOf: 64,
@@ -865,6 +981,8 @@ describe("course crud functions", async () => {
                                         name: "MATH",
                                         number: 101,
                                         credits: 3,
+                                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -875,6 +993,8 @@ describe("course crud functions", async () => {
                                         name: "PHYS",
                                         number: 157,
                                         credits: 3,
+                                        title: "Introductory Physics for Engineers I",
+                                        description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -889,6 +1009,8 @@ describe("course crud functions", async () => {
                         name: "MATH",
                         number: 103,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         school: school._id,
                         preRequisites: [],
                         coRequisites: [],
@@ -902,6 +1024,8 @@ describe("course crud functions", async () => {
                         number: 101,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -912,6 +1036,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -939,6 +1065,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -968,6 +1096,8 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 157,
                 credits: 3,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -977,6 +1107,8 @@ describe("course crud functions", async () => {
                 number: 101,
                 credits: 3,
                 school: school._id,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: []
             });
@@ -984,6 +1116,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 103,
                 credits: 3,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1000,6 +1134,8 @@ describe("course crud functions", async () => {
                 number: 221,
                 school: school._id,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [
                     {
                         scoreOf: 64,
@@ -1012,6 +1148,8 @@ describe("course crud functions", async () => {
                                         number: 101,
                                         credits: 3,
                                         school: school._id,
+                                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                         preRequisites: [],
                                         coRequisites: [],
                                         __v: 0,
@@ -1021,6 +1159,8 @@ describe("course crud functions", async () => {
                                         name: "PHYS",
                                         number: 157,
                                         credits: 3,
+                                        title: "Introductory Physics for Engineers I",
+                                        description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -1037,6 +1177,8 @@ describe("course crud functions", async () => {
                                 name: "MATH",
                                 number: 103,
                                 credits: 3,
+                                title: "Integral Calculus with Applications to Life Sciences",
+                                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
@@ -1052,6 +1194,8 @@ describe("course crud functions", async () => {
                         number: 101,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1062,6 +1206,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1089,6 +1235,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -1118,6 +1266,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 210,
                 school: school._id,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 4,
                 preRequisites: ["CPSC 110"],
                 coRequisites: []
@@ -1125,6 +1275,8 @@ describe("course crud functions", async () => {
             const cpsc110 = await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: school._id,
                 credits: 4,
                 preRequisites: [],
@@ -1134,6 +1286,8 @@ describe("course crud functions", async () => {
                 name: "PHYS",
                 number: 157,
                 credits: 3,
+                title: "Introductory Physics for Engineers I",
+                description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1141,6 +1295,8 @@ describe("course crud functions", async () => {
             const math101 = await Course.create({
                 name: "MATH",
                 number: 101,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
                 school: school._id,
                 preRequisites: [],
@@ -1150,6 +1306,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 103,
                 credits: 3,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1166,6 +1324,8 @@ describe("course crud functions", async () => {
                 number: 221,
                 school: school._id,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [
                     {
                         scoreOf: 64,
@@ -1177,6 +1337,8 @@ describe("course crud functions", async () => {
                                         name: "MATH",
                                         number: 101,
                                         credits: 3,
+                                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -1187,6 +1349,8 @@ describe("course crud functions", async () => {
                                         name: "PHYS",
                                         number: 157,
                                         credits: 3,
+                                        title: "Introductory Physics for Engineers I",
+                                        description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
@@ -1203,11 +1367,15 @@ describe("course crud functions", async () => {
                                 name: "CPSC",
                                 number: 210,
                                 school: school._id,
+                                title: "Matrix Algebra",
+                                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 credits: 4,
                                 preRequisites: [
                                     {
                                         name: "CPSC",
                                         number: 110,
+                                        title: "Computation, Programs, and Programming",
+                                        description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                         school: school._id,
                                         credits: 4,
                                         preRequisites: [],
@@ -1229,6 +1397,8 @@ describe("course crud functions", async () => {
                         number: 101,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1239,6 +1409,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1266,6 +1438,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 221,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [
                     {
@@ -1285,6 +1459,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 101,
                 credits: 3,
+                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1293,6 +1469,8 @@ describe("course crud functions", async () => {
                 name: "MATH",
                 number: 103,
                 credits: 3,
+                title: "Integral Calculus with Applications to Life Sciences",
+                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1309,6 +1487,8 @@ describe("course crud functions", async () => {
                 number: 221,
                 school: school._id,
                 credits: 3,
+                title: "Matrix Algebra",
+                description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [
                     {
                         scoreOf: 64,
@@ -1333,6 +1513,8 @@ describe("course crud functions", async () => {
                         number: 101,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
+                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1343,6 +1525,8 @@ describe("course crud functions", async () => {
                         number: 103,
                         school: school._id,
                         credits: 3,
+                        title: "Integral Calculus with Applications to Life Sciences",
+                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
                         __v: 0,
@@ -1371,6 +1555,8 @@ describe("course crud functions", async () => {
             await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 5,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1385,6 +1571,8 @@ describe("course crud functions", async () => {
                 body: {
                     name: "CPSC",
                     number: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
                     coRequisites: []
@@ -1393,6 +1581,8 @@ describe("course crud functions", async () => {
             const expectedCourse = {
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 5,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1430,6 +1620,8 @@ describe("course crud functions", async () => {
             await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1444,6 +1636,8 @@ describe("course crud functions", async () => {
                 body: {
                     name: "CPSC",
                     number: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
                     coRequisites: []
@@ -1466,6 +1660,8 @@ describe("course crud functions", async () => {
             await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1480,6 +1676,8 @@ describe("course crud functions", async () => {
                 body: {
                     name: "CPSC",
                     number: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
                     coRequisites: []
@@ -1504,6 +1702,8 @@ describe("course crud functions", async () => {
             const cpsc110 = await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1519,6 +1719,8 @@ describe("course crud functions", async () => {
             const expectedCourse = {
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1554,6 +1756,8 @@ describe("course crud functions", async () => {
             const cpsc110 = await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1583,6 +1787,8 @@ describe("course crud functions", async () => {
             await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1614,6 +1820,8 @@ describe("course crud functions", async () => {
             const cpsc110 = await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1623,6 +1831,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 111,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1631,6 +1841,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 112,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1639,6 +1851,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 113,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1647,6 +1861,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 114,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1655,6 +1871,8 @@ describe("course crud functions", async () => {
                 {
                     name: "CPSC",
                     number: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     school: schoolModel._id,
                     preRequisites: [],
@@ -1666,6 +1884,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 111,
                     credits: 4,
+                    title: "Any title",
+                    description: "Any description",
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
@@ -1676,6 +1896,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 112,
                     credits: 4,
+                    title: "Any title",
+                    description: "Any description",
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
@@ -1686,6 +1908,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 113,
                     credits: 4,
+                    title: "Any title",
+                    description: "Any description",
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
@@ -1696,6 +1920,8 @@ describe("course crud functions", async () => {
                     name: "CPSC",
                     number: 114,
                     credits: 4,
+                    title: "Any title",
+                    description: "Any description",
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
@@ -1729,6 +1955,8 @@ describe("course crud functions", async () => {
                 body: {
                     name: "CPSC",
                     number: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
                     coRequisites: []
@@ -1753,6 +1981,8 @@ describe("course crud functions", async () => {
             await Course.create({
                 name: "CPSC",
                 number: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
@@ -1762,6 +1992,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 111,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1770,6 +2002,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 112,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1778,6 +2012,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 113,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []
@@ -1786,6 +2022,8 @@ describe("course crud functions", async () => {
                 name: "CPSC",
                 number: 114,
                 credits: 4,
+                title: "Any title",
+                description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: []

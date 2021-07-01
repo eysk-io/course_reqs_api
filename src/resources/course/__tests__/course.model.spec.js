@@ -12,6 +12,22 @@ describe("course model", () => {
                 maxlength: 5
             })
         })
+        test("title", () => {
+            const title = Course.schema.obj.title
+            expect(title).toEqual({
+                type: String,
+                required: true,
+                trim: true
+            });
+        });
+        test("description", () => {
+            const description = Course.schema.obj.description
+            expect(description).toEqual({
+                type: String,
+                required: true,
+                trim: true
+            });
+        });
         test("number", () => {
             const number = Course.schema.obj.number
             expect(number).toEqual({

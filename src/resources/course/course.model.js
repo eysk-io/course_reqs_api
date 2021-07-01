@@ -14,6 +14,16 @@ const courseSchema = new mongoose.Schema(
             trim: true,
             maxlength: 5
         },
+        title: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        description: {
+            type: String,
+            required: true,
+            trim: true
+        },
         school: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: "school",
