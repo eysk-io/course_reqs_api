@@ -259,10 +259,12 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
     }
     if (!doc) {
         let courseObj = {
-            _id: "-1",
+            _id: "",
             preRequisites: [],
             coRequisites: [],
-            department: courseRequisite,
+            department: "",
+            description: "",
+            title: courseRequisite,
             number: -1,
             credits: 0,
             school: schoolId,

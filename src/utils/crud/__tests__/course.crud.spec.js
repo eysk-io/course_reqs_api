@@ -1495,14 +1495,16 @@ describe("course crud functions", async () => {
                         metric: "percentage",
                         courses: [
                             {
-                                department: "Principles of Mathematics 12 or Pre-calculus 12",
+                                department: "",
                                 number: -1,
                                 credits: 0,
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
+                                description: "",
+                                title: "Principles of Mathematics 12 or Pre-calculus 12",
                                 __v: 0,
-                                _id: "-1"
+                                _id: ""
                             }
                         ]
                     }
