@@ -114,7 +114,34 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
 }
 
 export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
-    // TODO:
+    try {
+        const schoolName = req.params.school;
+        const schoolDoc = await schoolModel
+            .findOne({ name: schoolName })
+            .lean()
+            .exec();
+        if (!schoolDoc) {
+            return res.status(400).end();
+        }
+        const schoolId = schoolDoc._id;
+        const courseName = req.params.courseName;
+        const courseNumber = req.params.courseNumber;
+        const removedCourse = await courseModel
+            .findOneAndRemove({
+                school: schoolId,
+                name: courseName,
+                number: courseNumber
+            })
+            .lean()
+            .exec();
+        if (!removedCourse) {
+            return res.status(400).end();
+        }
+        return res.status(200).json({ data: removedCourse });
+    } catch (e) {
+        console.error(e);
+        res.status(400).end();
+    }
 }
 
 export const courseCrudControllers = (courseModel, schoolModel) => ({

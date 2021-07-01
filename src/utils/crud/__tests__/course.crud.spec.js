@@ -1498,4 +1498,114 @@ describe("course crud functions", async () => {
             expect.assertions(2);
         });
     });
+    describe("removeCourse", async () => {
+        test("remove a course", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: schoolModel.name,
+                    courseName: cpsc110.name,
+                    courseNumber: cpsc110.number,
+                }
+            };
+            const expectedCourse = {
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: [],
+                __v: 0,
+                _id: cpsc110._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await removeCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(4);
+        });
+        test("400 if school not found", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: "SFU",
+                    courseName: cpsc110.name,
+                    courseNumber: cpsc110.number
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await removeCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("400 if course not found", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: schoolModel.name,
+                    courseName: "CPSC",
+                    courseNumber: 111
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await removeCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+    });
 });
