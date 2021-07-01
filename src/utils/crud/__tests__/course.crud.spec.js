@@ -515,6 +515,855 @@ describe("course crud functions", async () => {
             await getCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("find all courses by school with reqs that contain 'scoreOf' requirements", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            "PHYS 157"
+                        ]
+                    },
+                    "MATH 101",
+                    "MATH 103"
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                name: "PHYS",
+                                number: 157,
+                                credits: 3,
+                                school: school._id,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: phys157._id
+                            }
+                        ]
+                    },
+                    {
+                        name: "MATH",
+                        number: 101,
+                        credits: 3,
+                        school: school._id,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        credits: 3,
+                        school: school._id,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school with reqs that contain nested 'scoreOf' requirements", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        oneOf: [
+                            {
+                                scoreOf: 64,
+                                metric: "percentage",
+                                courses: [
+                                    "PHYS 157"
+                                ]
+                            },
+                            "MATH 101",
+                        ]
+                    },
+                    "MATH 103"
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        oneOf: [
+                            {
+                                scoreOf: 64,
+                                metric: "percentage",
+                                courses: [
+                                    {
+                                        name: "PHYS",
+                                        number: 157,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: phys157._id
+                                    }
+                                ]
+                            },
+                            {
+                                name: "MATH",
+                                number: 101,
+                                credits: 3,
+                                school: school._id,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: math101._id
+                            },
+                        ]
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        credits: 3,
+                        school: school._id,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school with reqs that contain 'oneOf' requirements within 'scoreOf' requirements", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    "MATH 101",
+                                    "PHYS 157"
+                                ]
+                            }
+                        ]
+                    },
+                    "MATH 103"
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    {
+                                        name: "MATH",
+                                        number: 101,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: math101._id
+                                    },
+                                    {
+                                        name: "PHYS",
+                                        number: 157,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: phys157._id
+                                    },
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        credits: 3,
+                        school: school._id,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school with reqs that contain 'advancedCredit' requirements", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    "MATH 101",
+                                    "PHYS 157"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        advancedCredit: [
+                            "MATH 103"
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    {
+                                        name: "MATH",
+                                        number: 101,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: math101._id
+                                    },
+                                    {
+                                        name: "PHYS",
+                                        number: 157,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: phys157._id
+                                    },
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        advancedCredit: [
+                            {
+                                name: "MATH",
+                                number: 103,
+                                credits: 3,
+                                school: school._id,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: math103._id
+                            }
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school with reqs that contain nested 'advancedCredit' requirements", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    "MATH 101",
+                                    "PHYS 157"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        advancedCredit: [
+                            "CPSC 210"
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const cpsc210 = await Course.create({
+                name: "CPSC",
+                number: 210,
+                school: school._id,
+                credits: 4,
+                preRequisites: ["CPSC 110"],
+                coRequisites: []
+            });
+            const cpsc110 = await Course.create({
+                name: "CPSC",
+                number: 110,
+                school: school._id,
+                credits: 4,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const phys157 = await Course.create({
+                name: "PHYS",
+                number: 157,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                oneOf: [
+                                    {
+                                        name: "MATH",
+                                        number: 101,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: math101._id
+                                    },
+                                    {
+                                        name: "PHYS",
+                                        number: 157,
+                                        credits: 3,
+                                        school: school._id,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: phys157._id
+                                    },
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        advancedCredit: [
+                            {
+                                name: "CPSC",
+                                number: 210,
+                                school: school._id,
+                                credits: 4,
+                                preRequisites: [
+                                    {
+                                        name: "CPSC",
+                                        number: 110,
+                                        school: school._id,
+                                        credits: 4,
+                                        preRequisites: [],
+                                        coRequisites: [],
+                                        __v: 0,
+                                        _id: cpsc110._id
+                                    }
+                                ],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: cpsc210._id
+                            }
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("find all courses by school including reqs that are not courses within the system", async () => {
+            const school = await School.create({ name: "UBC" });
+            const math221 = await Course.create({
+                name: "MATH",
+                number: 221,
+                credits: 3,
+                school: school._id,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            "Principles of Mathematics 12 or Pre-calculus 12"
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    "MATH 101",
+                    "MATH 103"
+                ]
+            });
+            const math101 = await Course.create({
+                name: "MATH",
+                number: 101,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const math103 = await Course.create({
+                name: "MATH",
+                number: 103,
+                credits: 3,
+                school: school._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const req = {
+                params: {
+                    school: school.name,
+                    courseName: math221.name,
+                    courseNumber: math221.number
+                }
+            };
+            const expectedCourse = {
+                name: "MATH",
+                number: 221,
+                school: school._id,
+                credits: 3,
+                preRequisites: [
+                    {
+                        scoreOf: 64,
+                        metric: "percentage",
+                        courses: [
+                            {
+                                name: "Principles of Mathematics 12 or Pre-calculus 12",
+                                number: -1,
+                                credits: 0,
+                                school: school._id,
+                                preRequisites: [],
+                                coRequisites: [],
+                                __v: 0,
+                                _id: "-1"
+                            }
+                        ]
+                    }
+                ],
+                coRequisites: [
+                    {
+                        name: "MATH",
+                        number: 101,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math101._id
+                    },
+                    {
+                        name: "MATH",
+                        number: 103,
+                        school: school._id,
+                        credits: 3,
+                        preRequisites: [],
+                        coRequisites: [],
+                        __v: 0,
+                        _id: math103._id
+                    },
+                ],
+                __v: 0,
+                _id: math221._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
     });
     describe("updateCourse", async () => {
         test("update a course's information", async () => {

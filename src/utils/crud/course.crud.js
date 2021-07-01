@@ -44,7 +44,6 @@ export const removeCoursesByName = (courseModel, schoolModel) => async (req, res
     // TODO:
 }
 
-// TODO: Must complete co-reqs and "oneOf" cases
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
@@ -129,30 +128,71 @@ export const courseCrudControllers = (courseModel, schoolModel) => ({
 });
 
 const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseRequisite) => {
-    if (
-        typeof (courseRequisite) !== "string" &&
-        Object.keys(courseRequisite).includes("oneOf")
-    ) {
-        let oneOfListLength = courseRequisite.oneOf.length
-        let oneOfObj = {
-            oneOf: []
-        };
-        for (let i = 0; i < oneOfListLength; i++) {
-            oneOfObj.oneOf[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.oneOf[i]);
+    if (typeof (courseRequisite) !== "string") {
+        let courseObj = {};
+        if (Object.keys(courseRequisite).includes("oneOf")) {
+            let oneOfListLength = courseRequisite.oneOf.length
+            courseObj.oneOf = [];
+            for (let i = 0; i < oneOfListLength; i++) {
+                courseObj.oneOf[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.oneOf[i]);
+            }
         }
-        return oneOfObj;
+        if (
+            Object.keys(courseRequisite).includes("scoreOf") &&
+            Object.keys(courseRequisite).includes("metric") &&
+            Object.keys(courseRequisite).includes("courses")
+        ) {
+            let numCourses = courseRequisite.courses.length;
+            courseObj = {
+                scoreOf: courseRequisite.scoreOf,
+                metric: courseRequisite.metric,
+                courses: []
+            };
+            for (let i = 0; i < numCourses; i++) {
+                courseObj.courses[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.courses[i]);
+            }
+        }
+        if (Object.keys(courseRequisite).includes("advancedCredit")) {
+            let numCourses = courseRequisite.advancedCredit.length;
+            courseObj = {
+                advancedCredit: []
+            };
+            for (let i = 0; i < numCourses; i++) {
+                courseObj.advancedCredit[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.advancedCredit[i]);
+            }
+        }
+        return courseObj;
     }
     const fullName = courseRequisite.split(/[ ]+/);
     const courseName = fullName[0];
-    const courseNumber = parseInt(fullName[1]);
-    const doc = await courseModel
-        .findOne({
+    let doc;
+    if (
+        !isNaN(fullName[1]) &&
+        !isNaN(parseFloat(fullName[1]))
+    ) {
+        const courseNumber = parseInt(fullName[1]);
+        doc = await courseModel
+            .findOne({
+                school: schoolId,
+                name: courseName,
+                number: courseNumber
+            })
+            .lean()
+            .exec();
+    }
+    if (!doc) {
+        let courseObj = {
+            _id: "-1",
+            preRequisites: [],
+            coRequisites: [],
+            name: courseRequisite,
+            number: -1,
+            credits: 0,
             school: schoolId,
-            name: courseName,
-            number: courseNumber
-        })
-        .lean()
-        .exec();
+            __v: 0
+        }
+        return courseObj;
+    }
     for (let i = 0; i < doc.preRequisites.length; i++) {
         doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i]);
     }
