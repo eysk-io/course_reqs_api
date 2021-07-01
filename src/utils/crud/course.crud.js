@@ -66,7 +66,32 @@ export const getAllCoursesBySchoolAndName = (courseModel, schoolModel) => async 
 }
 
 export const removeAllCoursesBySchoolAndName = (courseModel, schoolModel) => async (req, res) => {
-    // TODO:
+    try {
+        const schoolName = req.params.school;
+        const courseName = req.params.courseName;
+        const schoolDoc = await schoolModel
+            .findOne({ name: schoolName })
+            .lean()
+            .exec();
+        if (!schoolDoc) {
+            return res.status(404).end();
+        }
+        const schoolId = schoolDoc._id
+        const doc = await courseModel
+            .remove({
+                school: schoolId,
+                name: courseName
+            })
+            .lean()
+            .exec();
+        if (!doc) {
+            return res.status(404).end();
+        }
+        return res.status(200).json({ data: doc });
+    } catch (e) {
+        console.error(e);
+        res.status(400).end();
+    }
 }
 
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {

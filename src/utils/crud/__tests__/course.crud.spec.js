@@ -1747,4 +1747,102 @@ describe("course crud functions", async () => {
             expect.assertions(2);
         });
     });
+    describe("removeAllCoursesBySchoolAndName", async () => {
+        test("remove all courses that match given school and name", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                name: "CPSC",
+                number: 110,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            await Course.create({
+                name: "CPSC",
+                number: 111,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            await Course.create({
+                name: "CPSC",
+                number: 112,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            await Course.create({
+                name: "CPSC",
+                number: 113,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            await Course.create({
+                name: "CPSC",
+                number: 114,
+                credits: 4,
+                school: schoolModel._id,
+                preRequisites: [],
+                coRequisites: []
+            });
+            const expectedResult = {
+                n: 5,
+                ok: 1,
+                deletedCount: 5
+            }
+
+            const req = {
+                params: {
+                    school: schoolModel.name,
+                    courseName: "CPSC",
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedResult);
+                }
+            };
+            await removeAllCoursesBySchoolAndName(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual([]);
+                }
+            };
+            await getAllCoursesBySchoolAndName(Course, School)(req, newRes);
+            expect.assertions(4);
+        });
+        test("404 if school not found", async () => {
+            const req = {
+                params: {
+                    school: "UBC",
+                    courseName: "CPSC"
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(404);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await removeAllCoursesBySchoolAndName(Course, School)(req, res);
+            expect.assertions(2);
+        });
+    });
 });
