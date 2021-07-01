@@ -4,8 +4,8 @@ describe("course unprotected router", () => {
     test("has crud routes", () => {
         const routes = [
             { path: "/:school", method: "get" },
-            { path: "/:school/:courseName", method: "get" },
-            { path: "/:school/:courseName/:courseNumber", method: "get" }
+            { path: "/:school/:courseDepartment", method: "get" },
+            { path: "/:school/:courseDepartment/:courseNumber", method: "get" }
         ];
 
         routes.forEach(route => {

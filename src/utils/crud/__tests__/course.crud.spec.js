@@ -1,8 +1,8 @@
 import {
     getAllCoursesBySchool,
     createCourse,
-    getAllCoursesBySchoolAndName,
-    removeAllCoursesBySchoolAndName,
+    getAllCoursesBySchoolAndDepartment,
+    removeAllCoursesBySchoolAndDepartment,
     getCourse,
     updateCourse,
     removeCourse
@@ -20,7 +20,7 @@ describe("course crud functions", async () => {
                     school: schoolModel.name
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     credits: 4,
                     title: "Computation, Programs, and Programming",
@@ -30,7 +30,7 @@ describe("course crud functions", async () => {
                 }
             };
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 credits: 4,
                 title: "Computation, Programs, and Programming",
@@ -45,7 +45,7 @@ describe("course crud functions", async () => {
                     return this;
                 },
                 json(result) {
-                    expect(result.data.name.toString()).toEqual(expectedCourse.name.toString());
+                    expect(result.data.department.toString()).toEqual(expectedCourse.department.toString());
                     expect(result.data.number).toEqual(expectedCourse.number);
                     expect(result.data.credits).toEqual(expectedCourse.credits);
                     expect(result.data.preRequisites).toHaveLength(0);
@@ -61,7 +61,7 @@ describe("course crud functions", async () => {
                     school: "UBC"
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     credits: 4,
                     title: "Computation, Programs, and Programming",
@@ -87,7 +87,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with no pre- or co-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const course = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 school: school._id,
                 credits: 4,
@@ -115,7 +115,7 @@ describe("course crud functions", async () => {
         });
         test("404 if school not found", async () => {
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 credits: 4,
                 title: "Computation, Programs, and Programming",
@@ -163,7 +163,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with one unnested pre-req", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc107 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 107,
                 school: school._id,
                 title: "Systematic Program Design",
@@ -173,7 +173,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc103 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 103,
                 school: school._id,
                 credits: 3,
@@ -183,7 +183,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             })
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 107,
                 school: school._id,
                 credits: 3,
@@ -191,7 +191,7 @@ describe("course crud functions", async () => {
                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 preRequisites: [
                     {
-                        name: "CPSC",
+                        department: "CPSC",
                         number: 103,
                         school: school._id,
                         title: "Introduction to Systematic Program Design",
@@ -210,7 +210,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: cpsc107.name,
+                    courseDepartment: cpsc107.department,
                     courseNumber: cpsc107.number
                 }
             };
@@ -229,7 +229,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with nested pre-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc340 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 340,
                 school: school._id,
                 title: "Machine Learning and Data Mining",
@@ -239,7 +239,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc221 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 221,
                 school: school._id,
                 title: "Basic Algorithms and Data Structures",
@@ -249,7 +249,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc210 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 210,
                 school: school._id,
                 title: "Software Construction",
@@ -259,7 +259,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 school: school._id,
                 title: "Computation, Programs, and Programming",
@@ -269,7 +269,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 340,
                 school: school._id,
                 title: "Machine Learning and Data Mining",
@@ -277,7 +277,7 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: [
                     {
-                        name: "CPSC",
+                        department: "CPSC",
                         number: 221,
                         school: school._id,
                         title: "Basic Algorithms and Data Structures",
@@ -285,7 +285,7 @@ describe("course crud functions", async () => {
                         credits: 4,
                         preRequisites: [
                             {
-                                name: "CPSC",
+                                department: "CPSC",
                                 number: 210,
                                 school: school._id,
                                 title: "Software Construction",
@@ -293,7 +293,7 @@ describe("course crud functions", async () => {
                                 credits: 4,
                                 preRequisites: [
                                     {
-                                        name: "CPSC",
+                                        department: "CPSC",
                                         number: 110,
                                         title: "Computation, Programs, and Programming",
                                         description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -322,7 +322,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: cpsc340.name,
+                    courseDepartment: cpsc340.department,
                     courseNumber: cpsc340.number
                 }
             };
@@ -341,7 +341,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with oneOf pre-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc210 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 210,
                 school: school._id,
                 title: "Software Construction",
@@ -357,7 +357,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -367,7 +367,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc107 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 107,
                 school: school._id,
                 title: "Systematic Program Design",
@@ -377,7 +377,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc103 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 103,
                 school: school._id,
                 title: "Introduction to Systematic Program Design",
@@ -387,7 +387,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 210,
                 school: school._id,
                 title: "Software Construction",
@@ -397,7 +397,7 @@ describe("course crud functions", async () => {
                     {
                         oneOf: [
                             {
-                                name: "CPSC",
+                                department: "CPSC",
                                 number: 110,
                                 title: "Computation, Programs, and Programming",
                                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -409,7 +409,7 @@ describe("course crud functions", async () => {
                                 _id: cpsc110._id
                             },
                             {
-                                name: "CPSC",
+                                department: "CPSC",
                                 number: 107,
                                 title: "Systematic Program Design",
                                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
@@ -417,7 +417,7 @@ describe("course crud functions", async () => {
                                 credits: 3,
                                 preRequisites: [
                                     {
-                                        name: "CPSC",
+                                        department: "CPSC",
                                         number: 103,
                                         school: school._id,
                                         title: "Introduction to Systematic Program Design",
@@ -443,7 +443,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: cpsc210.name,
+                    courseDepartment: cpsc210.department,
                     courseNumber: cpsc210.number
                 }
             };
@@ -462,7 +462,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with co-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const phys158 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 158,
                 credits: 3,
                 school: school._id,
@@ -479,7 +479,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 school: school._id,
@@ -489,7 +489,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 school: school._id,
@@ -499,7 +499,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 school: school._id,
@@ -509,7 +509,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const expectedCourse = {
-                name: "PHYS",
+                department: "PHYS",
                 number: 158,
                 school: school._id,
                 title: "Introductory Physics for Engineers II",
@@ -517,7 +517,7 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: [
                     {
-                        name: "PHYS",
+                        department: "PHYS",
                         number: 157,
                         school: school._id,
                         title: "Introductory Physics for Engineers I",
@@ -533,7 +533,7 @@ describe("course crud functions", async () => {
                     {
                         oneOf: [
                             {
-                                name: "MATH",
+                                department: "MATH",
                                 number: 101,
                                 school: school._id,
                                 credits: 3,
@@ -545,7 +545,7 @@ describe("course crud functions", async () => {
                                 _id: math101._id
                             },
                             {
-                                name: "MATH",
+                                department: "MATH",
                                 number: 103,
                                 school: school._id,
                                 credits: 3,
@@ -565,7 +565,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: phys158.name,
+                    courseDepartment: phys158.department,
                     courseNumber: phys158.number
                 }
             };
@@ -584,7 +584,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with reqs that contain 'scoreOf' requirements", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -607,7 +607,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
@@ -617,7 +617,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -627,7 +627,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -639,12 +639,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 title: "Matrix Algebra",
@@ -656,7 +656,7 @@ describe("course crud functions", async () => {
                         metric: "percentage",
                         courses: [
                             {
-                                name: "PHYS",
+                                department: "PHYS",
                                 number: 157,
                                 credits: 3,
                                 title: "Introductory Physics for Engineers I",
@@ -670,7 +670,7 @@ describe("course crud functions", async () => {
                         ]
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         credits: 3,
                         school: school._id,
@@ -682,7 +682,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         credits: 3,
                         school: school._id,
@@ -696,7 +696,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         school: school._id,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -708,7 +708,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -738,7 +738,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with reqs that contain nested 'scoreOf' requirements", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -765,7 +765,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
@@ -775,7 +775,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -785,7 +785,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -797,12 +797,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 title: "Matrix Algebra",
@@ -816,7 +816,7 @@ describe("course crud functions", async () => {
                                 metric: "percentage",
                                 courses: [
                                     {
-                                        name: "PHYS",
+                                        department: "PHYS",
                                         number: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
@@ -830,7 +830,7 @@ describe("course crud functions", async () => {
                                 ]
                             },
                             {
-                                name: "MATH",
+                                department: "MATH",
                                 number: 101,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -844,7 +844,7 @@ describe("course crud functions", async () => {
                         ]
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -858,7 +858,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -870,7 +870,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         credits: 3,
@@ -900,7 +900,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with reqs that contain 'oneOf' requirements within 'scoreOf' requirements", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -927,7 +927,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
@@ -937,7 +937,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -947,7 +947,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -959,12 +959,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 credits: 3,
@@ -978,7 +978,7 @@ describe("course crud functions", async () => {
                             {
                                 oneOf: [
                                     {
-                                        name: "MATH",
+                                        department: "MATH",
                                         number: 101,
                                         credits: 3,
                                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -990,7 +990,7 @@ describe("course crud functions", async () => {
                                         _id: math101._id
                                     },
                                     {
-                                        name: "PHYS",
+                                        department: "PHYS",
                                         number: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
@@ -1006,7 +1006,7 @@ describe("course crud functions", async () => {
                         ]
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1020,7 +1020,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         school: school._id,
                         credits: 3,
@@ -1032,7 +1032,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         credits: 3,
@@ -1062,7 +1062,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with reqs that contain 'advancedCredit' requirements", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1093,7 +1093,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
@@ -1103,7 +1103,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 school: school._id,
@@ -1113,7 +1113,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -1125,12 +1125,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 credits: 3,
@@ -1144,7 +1144,7 @@ describe("course crud functions", async () => {
                             {
                                 oneOf: [
                                     {
-                                        name: "MATH",
+                                        department: "MATH",
                                         number: 101,
                                         credits: 3,
                                         school: school._id,
@@ -1156,7 +1156,7 @@ describe("course crud functions", async () => {
                                         _id: math101._id
                                     },
                                     {
-                                        name: "PHYS",
+                                        department: "PHYS",
                                         number: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
@@ -1174,7 +1174,7 @@ describe("course crud functions", async () => {
                     {
                         advancedCredit: [
                             {
-                                name: "MATH",
+                                department: "MATH",
                                 number: 103,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Life Sciences",
@@ -1190,7 +1190,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         school: school._id,
                         credits: 3,
@@ -1202,7 +1202,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         credits: 3,
@@ -1232,7 +1232,7 @@ describe("course crud functions", async () => {
         test("find all courses by school with reqs that contain nested 'advancedCredit' requirements", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1263,7 +1263,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const cpsc210 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 210,
                 school: school._id,
                 title: "Matrix Algebra",
@@ -1273,7 +1273,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1283,7 +1283,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const phys157 = await Course.create({
-                name: "PHYS",
+                department: "PHYS",
                 number: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
@@ -1293,7 +1293,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1303,7 +1303,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -1315,12 +1315,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 credits: 3,
@@ -1334,7 +1334,7 @@ describe("course crud functions", async () => {
                             {
                                 oneOf: [
                                     {
-                                        name: "MATH",
+                                        department: "MATH",
                                         number: 101,
                                         credits: 3,
                                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1346,7 +1346,7 @@ describe("course crud functions", async () => {
                                         _id: math101._id
                                     },
                                     {
-                                        name: "PHYS",
+                                        department: "PHYS",
                                         number: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
@@ -1364,7 +1364,7 @@ describe("course crud functions", async () => {
                     {
                         advancedCredit: [
                             {
-                                name: "CPSC",
+                                department: "CPSC",
                                 number: 210,
                                 school: school._id,
                                 title: "Matrix Algebra",
@@ -1372,7 +1372,7 @@ describe("course crud functions", async () => {
                                 credits: 4,
                                 preRequisites: [
                                     {
-                                        name: "CPSC",
+                                        department: "CPSC",
                                         number: 110,
                                         title: "Computation, Programs, and Programming",
                                         description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1393,7 +1393,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         school: school._id,
                         credits: 3,
@@ -1405,7 +1405,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         credits: 3,
@@ -1435,7 +1435,7 @@ describe("course crud functions", async () => {
         test("find all courses by school including reqs that are not courses within the system", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1456,7 +1456,7 @@ describe("course crud functions", async () => {
                 ]
             });
             const math101 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1466,7 +1466,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const math103 = await Course.create({
-                name: "MATH",
+                department: "MATH",
                 number: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -1478,12 +1478,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: school.name,
-                    courseName: math221.name,
+                    courseDepartment: math221.department,
                     courseNumber: math221.number
                 }
             };
             const expectedCourse = {
-                name: "MATH",
+                department: "MATH",
                 number: 221,
                 school: school._id,
                 credits: 3,
@@ -1495,7 +1495,7 @@ describe("course crud functions", async () => {
                         metric: "percentage",
                         courses: [
                             {
-                                name: "Principles of Mathematics 12 or Pre-calculus 12",
+                                department: "Principles of Mathematics 12 or Pre-calculus 12",
                                 number: -1,
                                 credits: 0,
                                 school: school._id,
@@ -1509,7 +1509,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 101,
                         school: school._id,
                         credits: 3,
@@ -1521,7 +1521,7 @@ describe("course crud functions", async () => {
                         _id: math101._id
                     },
                     {
-                        name: "MATH",
+                        department: "MATH",
                         number: 103,
                         school: school._id,
                         credits: 3,
@@ -1553,7 +1553,7 @@ describe("course crud functions", async () => {
         test("update a course's information", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1565,11 +1565,11 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                     courseNumber: 110
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1579,7 +1579,7 @@ describe("course crud functions", async () => {
                 }
             };
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1594,7 +1594,7 @@ describe("course crud functions", async () => {
                     return this;
                 },
                 json(result) {
-                    expect(result.data.name.toString()).toEqual(expectedCourse.name.toString());
+                    expect(result.data.department.toString()).toEqual(expectedCourse.department.toString());
                     expect(result.data.number).toEqual(expectedCourse.number);
                     expect(result.data.credits).toEqual(expectedCourse.credits);
                     expect(result.data.preRequisites).toHaveLength(0);
@@ -1618,7 +1618,7 @@ describe("course crud functions", async () => {
         test("400 if school not found", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1630,11 +1630,11 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: "SFU",
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                     courseNumber: 110
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1658,7 +1658,7 @@ describe("course crud functions", async () => {
         test("400 if course not found", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1670,11 +1670,11 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                     courseNumber: 111
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1700,7 +1700,7 @@ describe("course crud functions", async () => {
         test("remove a course", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1712,12 +1712,12 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: cpsc110.name,
+                    courseDepartment: cpsc110.department,
                     courseNumber: cpsc110.number,
                 }
             };
             const expectedCourse = {
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1754,7 +1754,7 @@ describe("course crud functions", async () => {
         test("400 if school not found", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1766,7 +1766,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: "SFU",
-                    courseName: cpsc110.name,
+                    courseDepartment: cpsc110.department,
                     courseNumber: cpsc110.number
                 }
             };
@@ -1785,7 +1785,7 @@ describe("course crud functions", async () => {
         test("400 if course not found", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1797,7 +1797,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                     courseNumber: 111
                 },
             };
@@ -1814,11 +1814,11 @@ describe("course crud functions", async () => {
             expect.assertions(2);
         });
     });
-    describe("getAllCoursesBySchoolAndName", async () => {
+    describe("getAllCoursesBySchoolAndDepartment", async () => {
         test("get list of courses by school and name", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1828,7 +1828,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc111 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 111,
                 credits: 4,
                 title: "Any title",
@@ -1838,7 +1838,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc112 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 112,
                 credits: 4,
                 title: "Any title",
@@ -1848,7 +1848,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc113 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 113,
                 credits: 4,
                 title: "Any title",
@@ -1858,7 +1858,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             const cpsc114 = await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 114,
                 credits: 4,
                 title: "Any title",
@@ -1869,7 +1869,7 @@ describe("course crud functions", async () => {
             });
             const expectedCourseList = [
                 {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1881,7 +1881,7 @@ describe("course crud functions", async () => {
                     _id: cpsc110._id
                 },
                 {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 111,
                     credits: 4,
                     title: "Any title",
@@ -1893,7 +1893,7 @@ describe("course crud functions", async () => {
                     _id: cpsc111._id
                 },
                 {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 112,
                     credits: 4,
                     title: "Any title",
@@ -1905,7 +1905,7 @@ describe("course crud functions", async () => {
                     _id: cpsc112._id
                 },
                 {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 113,
                     credits: 4,
                     title: "Any title",
@@ -1917,7 +1917,7 @@ describe("course crud functions", async () => {
                     _id: cpsc113._id
                 },
                 {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 114,
                     credits: 4,
                     title: "Any title",
@@ -1932,7 +1932,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                 },
             };
             const res = {
@@ -1944,7 +1944,7 @@ describe("course crud functions", async () => {
                     expect(result.data).toEqual(expectedCourseList);
                 }
             };
-            await getAllCoursesBySchoolAndName(Course, School)(req, res);
+            await getAllCoursesBySchoolAndDepartment(Course, School)(req, res);
             expect.assertions(2);
         });
         test("404 if school not found", async () => {
@@ -1953,7 +1953,7 @@ describe("course crud functions", async () => {
                     school: "UBC"
                 },
                 body: {
-                    name: "CPSC",
+                    department: "CPSC",
                     number: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1971,15 +1971,15 @@ describe("course crud functions", async () => {
                     expect(true).toBe(true);
                 }
             }
-            await getAllCoursesBySchoolAndName(Course, School)(req, res);
+            await getAllCoursesBySchoolAndDepartment(Course, School)(req, res);
             expect.assertions(2);
         });
     });
-    describe("removeAllCoursesBySchoolAndName", async () => {
+    describe("removeAllCoursesBySchoolAndDepartment", async () => {
         test("remove all courses that match given school and name", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -1989,7 +1989,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 111,
                 credits: 4,
                 title: "Any title",
@@ -1999,7 +1999,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 112,
                 credits: 4,
                 title: "Any title",
@@ -2009,7 +2009,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 113,
                 credits: 4,
                 title: "Any title",
@@ -2019,7 +2019,7 @@ describe("course crud functions", async () => {
                 coRequisites: []
             });
             await Course.create({
-                name: "CPSC",
+                department: "CPSC",
                 number: 114,
                 credits: 4,
                 title: "Any title",
@@ -2037,7 +2037,7 @@ describe("course crud functions", async () => {
             const req = {
                 params: {
                     school: schoolModel.name,
-                    courseName: "CPSC",
+                    courseDepartment: "CPSC",
                 },
             };
             const res = {
@@ -2049,7 +2049,7 @@ describe("course crud functions", async () => {
                     expect(result.data).toEqual(expectedResult);
                 }
             };
-            await removeAllCoursesBySchoolAndName(Course, School)(req, res);
+            await removeAllCoursesBySchoolAndDepartment(Course, School)(req, res);
 
             const newRes = {
                 status(status) {
@@ -2060,14 +2060,14 @@ describe("course crud functions", async () => {
                     expect(result.data).toEqual([]);
                 }
             };
-            await getAllCoursesBySchoolAndName(Course, School)(req, newRes);
+            await getAllCoursesBySchoolAndDepartment(Course, School)(req, newRes);
             expect.assertions(4);
         });
         test("404 if school not found", async () => {
             const req = {
                 params: {
                     school: "UBC",
-                    courseName: "CPSC"
+                    courseDepartment: "CPSC"
                 }
             };
             const res = {
@@ -2079,7 +2079,7 @@ describe("course crud functions", async () => {
                     expect(true).toBe(true);
                 }
             }
-            await removeAllCoursesBySchoolAndName(Course, School)(req, res);
+            await removeAllCoursesBySchoolAndDepartment(Course, School)(req, res);
             expect.assertions(2);
         });
     });

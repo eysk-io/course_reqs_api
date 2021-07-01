@@ -4,9 +4,9 @@ describe("course protected router", () => {
     test("has crud routes", () => {
         const routes = [
             { path: "/:school", method: "post" },
-            { path: "/:school/:courseName", method: "delete" },
-            { path: "/:school/:courseName/:courseNumber", method: "put" },
-            { path: "/:school/:courseName/:courseNumber", method: "delete" }
+            { path: "/:school/:courseDepartment", method: "delete" },
+            { path: "/:school/:courseDepartment/:courseNumber", method: "put" },
+            { path: "/:school/:courseDepartment/:courseNumber", method: "delete" }
         ];
 
         routes.forEach(route => {

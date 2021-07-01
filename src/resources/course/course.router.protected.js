@@ -8,14 +8,14 @@ router
     .route("/:school")
     .post(courseCrudControllers.createCourse)
 
-// /api/course/:school/:courseName
+// /api/course/:school/:courseDepartment
 router
-    .route("/:school/:courseName")
-    .delete(courseCrudControllers.removeAllCoursesBySchoolAndName)
+    .route("/:school/:courseDepartment")
+    .delete(courseCrudControllers.removeAllCoursesBySchoolAndDepartment)
 
-// /api/course/:school/:courseName/:courseNumber
+// /api/course/:school/:courseDepartment/:courseNumber
 router
-    .route("/:school/:courseName/:courseNumber")
+    .route("/:school/:courseDepartment/:courseNumber")
     .put(courseCrudControllers.updateCourse)
     .delete(courseCrudControllers.removeCourse)
 
