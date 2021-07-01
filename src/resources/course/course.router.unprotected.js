@@ -11,7 +11,7 @@ router
 // /api/course/:school/:courseName
 router
     .route("/:school/:courseName")
-    .get(courseCrudControllers.getAllCoursesByName)
+    .get(courseCrudControllers.getAllCoursesBySchoolAndName)
 
 // /api/course/:school/:courseName/:courseNumber
 router

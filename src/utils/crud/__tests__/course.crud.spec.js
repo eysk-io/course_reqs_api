@@ -1,7 +1,7 @@
 import {
     getAllCoursesBySchool,
     createCourse,
-    getAllCoursesByName,
+    getAllCoursesBySchoolAndName,
     removeCoursesByName,
     getCourse,
     updateCourse,
