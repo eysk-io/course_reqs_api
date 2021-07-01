@@ -11,7 +11,7 @@ router
 // /api/course/:school/:courseName
 router
     .route("/:school/:courseName")
-    .delete(courseCrudControllers.removeCoursesByName)
+    .delete(courseCrudControllers.removeAllCoursesBySchoolAndName)
 
 // /api/course/:school/:courseName/:courseNumber
 router

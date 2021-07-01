@@ -65,7 +65,7 @@ export const getAllCoursesBySchoolAndName = (courseModel, schoolModel) => async 
     }
 }
 
-export const removeCoursesByName = (courseModel, schoolModel) => async (req, res) => {
+export const removeAllCoursesBySchoolAndName = (courseModel, schoolModel) => async (req, res) => {
     // TODO:
 }
 
@@ -173,7 +173,7 @@ export const courseCrudControllers = (courseModel, schoolModel) => ({
     getAllCoursesBySchool: getAllCoursesBySchool(courseModel, schoolModel),
     createCourse: createCourse(courseModel, schoolModel),
     getAllCoursesBySchoolAndName: getAllCoursesBySchoolAndName(courseModel, schoolModel),
-    removeCoursesByName: removeCoursesByName(courseModel, schoolModel),
+    removeAllCoursesBySchoolAndName: removeAllCoursesBySchoolAndName(courseModel, schoolModel),
     getCourse: getCourse(courseModel, schoolModel),
     updateCourse: updateCourse(courseModel, schoolModel),
     removeCourse: removeCourse(courseModel, schoolModel),

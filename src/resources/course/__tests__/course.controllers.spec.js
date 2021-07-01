@@ -7,7 +7,7 @@ describe("course controllers", () => {
             "getAllCoursesBySchool",
             "createCourse",
             "getAllCoursesBySchoolAndName",
-            "removeCoursesByName",
+            "removeAllCoursesBySchoolAndName",
             "getCourse",
             "updateCourse",
             "removeCourse"
