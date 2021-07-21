@@ -124,6 +124,9 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
         for (let i = 0; i < doc.coRequisites.length; i++) {
             doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
         }
+        for (let i = 0; i < doc.equivalencies.length; i++) {
+            doc.equivalencies[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.equivalencies[i]);
+        }
         return res.status(200).json({ data: doc });
     } catch (e) {
         console.error(e);
@@ -262,6 +265,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
             _id: "",
             preRequisites: [],
             coRequisites: [],
+            equivalencies: [],
             department: "",
             description: "",
             title: courseRequisite,
@@ -277,6 +281,9 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
     }
     for (let i = 0; i < doc.coRequisites.length; i++) {
         doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
+    }
+    for (let i = 0; i < doc.equivalencies.length; i++) {
+        doc.equivalencies[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.equivalencies[i]);
     }
     return doc;
 }

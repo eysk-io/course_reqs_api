@@ -49,6 +49,10 @@ const courseSchema = new mongoose.Schema(
             type: [mongoose.Mixed],
             required: true
         },
+        equivalencies: {
+            type: [mongoose.Mixed],
+            required: true
+        }
     }
 );
 

@@ -68,5 +68,12 @@ describe("course model", () => {
                 required: true
             });
         });
+        test("equivalencies", () => {
+            const equivalencies = Course.schema.obj.equivalencies;
+            expect(equivalencies).toEqual({
+                type: [mongoose.Mixed],
+                required: true
+            });
+        });
     });
 });

@@ -94,7 +94,8 @@ describe("course crud functions", async () => {
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -122,7 +123,8 @@ describe("course crud functions", async () => {
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: mongoose.Types.ObjectId(),
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: "UBC"
@@ -170,7 +172,8 @@ describe("course crud functions", async () => {
                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 credits: 3,
                 preRequisites: ["CPSC 103"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc103 = await Course.create({
                 department: "CPSC",
@@ -180,7 +183,8 @@ describe("course crud functions", async () => {
                 title: "Introduction to Systematic Program Design",
                 description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             })
             const expectedCourse = {
                 department: "CPSC",
@@ -199,11 +203,13 @@ describe("course crud functions", async () => {
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: cpsc103._id
                     }
                 ],
                 coRequisites: [],
+                equivalencies: [],
                 __v: 0,
                 _id: cpsc107._id
             };
@@ -236,7 +242,8 @@ describe("course crud functions", async () => {
                 description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
                 credits: 3,
                 preRequisites: ["CPSC 221"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc221 = await Course.create({
                 department: "CPSC",
@@ -246,7 +253,8 @@ describe("course crud functions", async () => {
                 description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
                 credits: 4,
                 preRequisites: ["CPSC 210"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc210 = await Course.create({
                 department: "CPSC",
@@ -256,7 +264,8 @@ describe("course crud functions", async () => {
                 description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
                 credits: 4,
                 preRequisites: ["CPSC 110"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc110 = await Course.create({
                 department: "CPSC",
@@ -266,7 +275,8 @@ describe("course crud functions", async () => {
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const expectedCourse = {
                 department: "CPSC",
@@ -301,21 +311,25 @@ describe("course crud functions", async () => {
                                         credits: 4,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: cpsc110._id
                                     }
                                 ],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: cpsc210._id
                             }
                         ],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: cpsc221._id
                     }
                 ],
                 coRequisites: [],
+                equivalencies: [],
                 __v: 0,
                 _id: cpsc340._id
             };
@@ -354,7 +368,8 @@ describe("course crud functions", async () => {
                         ]
                     }
                 ],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc110 = await Course.create({
                 department: "CPSC",
@@ -364,7 +379,8 @@ describe("course crud functions", async () => {
                 school: school._id,
                 credits: 4,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc107 = await Course.create({
                 department: "CPSC",
@@ -374,7 +390,8 @@ describe("course crud functions", async () => {
                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                 credits: 3,
                 preRequisites: ["CPSC 103"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc103 = await Course.create({
                 department: "CPSC",
@@ -384,7 +401,8 @@ describe("course crud functions", async () => {
                 description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                 credits: 3,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const expectedCourse = {
                 department: "CPSC",
@@ -405,6 +423,7 @@ describe("course crud functions", async () => {
                                 credits: 4,
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: cpsc110._id
                             },
@@ -425,11 +444,13 @@ describe("course crud functions", async () => {
                                         credits: 3,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: cpsc103._id
                                     }
                                 ],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: cpsc107._id
                             }
@@ -437,6 +458,7 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [],
+                equivalencies: [],
                 __v: 0,
                 _id: cpsc210._id
             };
@@ -476,7 +498,8 @@ describe("course crud functions", async () => {
                             "MATH 103"
                         ]
                     }
-                ]
+                ],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -486,7 +509,8 @@ describe("course crud functions", async () => {
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -496,7 +520,8 @@ describe("course crud functions", async () => {
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -506,7 +531,8 @@ describe("course crud functions", async () => {
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const expectedCourse = {
                 department: "PHYS",
@@ -525,6 +551,7 @@ describe("course crud functions", async () => {
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: phys157._id
                     },
@@ -541,6 +568,7 @@ describe("course crud functions", async () => {
                                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: math101._id
                             },
@@ -553,12 +581,14 @@ describe("course crud functions", async () => {
                                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: math103._id
                             },
                         ]
                     }
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: phys158._id
             };
@@ -604,7 +634,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -614,7 +645,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -624,7 +656,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -634,7 +667,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -664,6 +698,7 @@ describe("course crud functions", async () => {
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: phys157._id
                             }
@@ -678,6 +713,7 @@ describe("course crud functions", async () => {
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -690,6 +726,7 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     }
@@ -704,6 +741,7 @@ describe("course crud functions", async () => {
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -716,10 +754,12 @@ describe("course crud functions", async () => {
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -762,7 +802,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -772,7 +813,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -782,7 +824,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -792,7 +835,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -824,6 +868,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: phys157._id
                                     }
@@ -838,6 +883,7 @@ describe("course crud functions", async () => {
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: math101._id
                             },
@@ -852,6 +898,7 @@ describe("course crud functions", async () => {
                         school: school._id,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     }
@@ -866,6 +913,7 @@ describe("course crud functions", async () => {
                         credits: 3,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -878,10 +926,12 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -924,7 +974,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -934,7 +985,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -944,7 +996,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -954,7 +1007,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -986,6 +1040,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -998,6 +1053,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1014,6 +1070,7 @@ describe("course crud functions", async () => {
                         school: school._id,
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     }
@@ -1028,6 +1085,7 @@ describe("course crud functions", async () => {
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -1040,10 +1098,12 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -1090,7 +1150,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -1100,7 +1161,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -1110,7 +1172,8 @@ describe("course crud functions", async () => {
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -1120,7 +1183,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1152,6 +1216,7 @@ describe("course crud functions", async () => {
                                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -1164,6 +1229,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1182,6 +1248,7 @@ describe("course crud functions", async () => {
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: math103._id
                             }
@@ -1198,6 +1265,7 @@ describe("course crud functions", async () => {
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -1210,10 +1278,12 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -1260,7 +1330,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const cpsc210 = await Course.create({
                 department: "CPSC",
@@ -1270,7 +1341,8 @@ describe("course crud functions", async () => {
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 4,
                 preRequisites: ["CPSC 110"],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc110 = await Course.create({
                 department: "CPSC",
@@ -1280,7 +1352,8 @@ describe("course crud functions", async () => {
                 school: school._id,
                 credits: 4,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const phys157 = await Course.create({
                 department: "PHYS",
@@ -1290,7 +1363,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -1300,7 +1374,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -1310,7 +1385,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1342,6 +1418,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -1354,6 +1431,7 @@ describe("course crud functions", async () => {
                                         school: school._id,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1380,11 +1458,13 @@ describe("course crud functions", async () => {
                                         credits: 4,
                                         preRequisites: [],
                                         coRequisites: [],
+                                        equivalencies: [],
                                         __v: 0,
                                         _id: cpsc110._id
                                     }
                                 ],
                                 coRequisites: [],
+                                equivalencies: [],
                                 __v: 0,
                                 _id: cpsc210._id
                             }
@@ -1401,6 +1481,7 @@ describe("course crud functions", async () => {
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -1413,10 +1494,12 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -1453,7 +1536,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     "MATH 101",
                     "MATH 103"
-                ]
+                ],
+                equivalencies: []
             });
             const math101 = await Course.create({
                 department: "MATH",
@@ -1463,7 +1547,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const math103 = await Course.create({
                 department: "MATH",
@@ -1473,7 +1558,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 school: school._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1501,6 +1587,7 @@ describe("course crud functions", async () => {
                                 school: school._id,
                                 preRequisites: [],
                                 coRequisites: [],
+                                equivalencies: [],
                                 description: "",
                                 title: "Principles of Mathematics 12 or Pre-calculus 12",
                                 __v: 0,
@@ -1519,6 +1606,7 @@ describe("course crud functions", async () => {
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math101._id
                     },
@@ -1531,10 +1619,12 @@ describe("course crud functions", async () => {
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         preRequisites: [],
                         coRequisites: [],
+                        equivalencies: [],
                         __v: 0,
                         _id: math103._id
                     },
                 ],
+                equivalencies: [],
                 __v: 0,
                 _id: math221._id
             };
@@ -1562,7 +1652,8 @@ describe("course crud functions", async () => {
                 credits: 5,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1577,7 +1668,8 @@ describe("course crud functions", async () => {
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
-                    coRequisites: []
+                    coRequisites: [],
+                    equivalencies: []
                 }
             };
             const expectedCourse = {
@@ -1588,7 +1680,8 @@ describe("course crud functions", async () => {
                 credits: 5,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             };
             const res = {
                 status(status) {
@@ -1627,7 +1720,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1642,7 +1736,8 @@ describe("course crud functions", async () => {
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
-                    coRequisites: []
+                    coRequisites: [],
+                    equivalencies: []
                 }
             };
             const res = {
@@ -1667,7 +1762,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1682,7 +1778,8 @@ describe("course crud functions", async () => {
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
-                    coRequisites: []
+                    coRequisites: [],
+                    equivalencies: []
                 }
             };
             const res = {
@@ -1709,7 +1806,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1727,6 +1825,7 @@ describe("course crud functions", async () => {
                 school: schoolModel._id,
                 preRequisites: [],
                 coRequisites: [],
+                equivalencies: [],
                 __v: 0,
                 _id: cpsc110._id
             };
@@ -1763,7 +1862,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1794,7 +1894,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const req = {
                 params: {
@@ -1827,7 +1928,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc111 = await Course.create({
                 department: "CPSC",
@@ -1837,7 +1939,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc112 = await Course.create({
                 department: "CPSC",
@@ -1847,7 +1950,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc113 = await Course.create({
                 department: "CPSC",
@@ -1857,7 +1961,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const cpsc114 = await Course.create({
                 department: "CPSC",
@@ -1867,7 +1972,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const expectedCourseList = [
                 {
@@ -1879,6 +1985,7 @@ describe("course crud functions", async () => {
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
+                    equivalencies: [],
                     __v: 0,
                     _id: cpsc110._id
                 },
@@ -1891,6 +1998,7 @@ describe("course crud functions", async () => {
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
+                    equivalencies: [],
                     __v: 0,
                     _id: cpsc111._id
                 },
@@ -1903,6 +2011,7 @@ describe("course crud functions", async () => {
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
+                    equivalencies: [],
                     __v: 0,
                     _id: cpsc112._id
                 },
@@ -1915,6 +2024,7 @@ describe("course crud functions", async () => {
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
+                    equivalencies: [],
                     __v: 0,
                     _id: cpsc113._id
                 },
@@ -1927,6 +2037,7 @@ describe("course crud functions", async () => {
                     school: schoolModel._id,
                     preRequisites: [],
                     coRequisites: [],
+                    equivalencies: [],
                     __v: 0,
                     _id: cpsc114._id
                 }
@@ -1961,7 +2072,8 @@ describe("course crud functions", async () => {
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
                     preRequisites: [],
-                    coRequisites: []
+                    coRequisites: [],
+                    equivalencies: []
                 }
             };
             const res = {
@@ -1988,7 +2100,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             await Course.create({
                 department: "CPSC",
@@ -1998,7 +2111,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             await Course.create({
                 department: "CPSC",
@@ -2008,7 +2122,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             await Course.create({
                 department: "CPSC",
@@ -2018,7 +2133,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             await Course.create({
                 department: "CPSC",
@@ -2028,7 +2144,8 @@ describe("course crud functions", async () => {
                 description: "Any description",
                 school: schoolModel._id,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: []
             });
             const expectedResult = {
                 n: 5,
