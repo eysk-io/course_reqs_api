@@ -8,7 +8,7 @@ export const getAllCoursesBySchool = (courseModel, schoolModel) => async (req, r
             return res.status(404).end();
         }
         const docs = await courseModel
-            .find({ school: schoolDoc._id })
+            .find({ school: schoolDoc.name })
             .lean()
             .exec();
         return res.status(200).json({ data: docs });
@@ -27,7 +27,7 @@ export const createCourse = (courseModel, schoolModel) => async (req, res) => {
         if (!schoolDoc) {
             return res.status(404).end();
         }
-        req.body.school = schoolDoc._id;
+        req.body.school = schoolDoc.name;
         const doc = await courseModel.create({ ...req.body });
         return res.status(201).json({ data: doc });
     } catch (e) {
@@ -47,7 +47,7 @@ export const getAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) => 
         if (!schoolDoc) {
             return res.status(404).end();
         }
-        const schoolId = schoolDoc._id
+        const schoolId = schoolDoc.name
         const doc = await courseModel
             .find({
                 school: schoolId,
@@ -76,7 +76,7 @@ export const removeAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) 
         if (!schoolDoc) {
             return res.status(404).end();
         }
-        const schoolId = schoolDoc._id
+        const schoolId = schoolDoc.name
         const doc = await courseModel
             .remove({
                 school: schoolId,
@@ -106,7 +106,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
         if (!schoolDoc) {
             return res.status(400).end();
         }
-        const schoolId = schoolDoc._id
+        const schoolId = schoolDoc.name
         const doc = await courseModel
             .findOne({
                 school: schoolId,
@@ -144,7 +144,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
         if (!schoolDoc) {
             return res.status(400).end();
         }
-        const schoolId = schoolDoc._id;
+        const schoolId = schoolDoc.name;
         const courseDepartment = req.params.courseDepartment;
         const courseNumber = req.params.courseNumber;
         const doc = await courseModel
@@ -176,7 +176,7 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
         if (!schoolDoc) {
             return res.status(400).end();
         }
-        const schoolId = schoolDoc._id;
+        const schoolId = schoolDoc.name;
         const courseDepartment = req.params.courseDepartment;
         const courseNumber = req.params.courseNumber;
         const removedCourse = await courseModel

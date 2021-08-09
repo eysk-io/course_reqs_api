@@ -49,7 +49,7 @@ describe("course model", () => {
         test("school", () => {
             const school = Course.schema.obj.school;
             expect(school).toEqual({
-                type: mongoose.SchemaTypes.ObjectId,
+                type: String,
                 ref: 'school',
                 required: true
             });
