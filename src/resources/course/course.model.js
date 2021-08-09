@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const courseSchema = new mongoose.Schema(
     {
-        department: {
+        subject: {
             type: String,
             required: true,
             trim: true,

@@ -6,8 +6,8 @@ describe("course controllers", () => {
         const crudMethods = [
             "getAllCoursesBySchool",
             "createCourse",
-            "getAllCoursesBySchoolAndDepartment",
-            "removeAllCoursesBySchoolAndDepartment",
+            "getAllCoursesBySchoolAndSubject",
+            "removeAllCoursesBySchoolAndSubject",
             "getCourse",
             "updateCourse",
             "removeCourse"

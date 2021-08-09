@@ -8,14 +8,14 @@ router
     .route("/:school")
     .get(courseCrudControllers.getAllCoursesBySchool)
 
-// /api/course/:school/:courseDepartment
+// /api/course/:school/:subject
 router
-    .route("/:school/:courseDepartment")
-    .get(courseCrudControllers.getAllCoursesBySchoolAndDepartment)
+    .route("/:school/:subject")
+    .get(courseCrudControllers.getAllCoursesBySchoolAndSubject)
 
-// /api/course/:school/:courseDepartment/:courseNumber
+// /api/course/:school/:subject/:courseNumber
 router
-    .route("/:school/:courseDepartment/:courseNumber")
+    .route("/:school/:subject/:courseNumber")
     .get(courseCrudControllers.getCourse)
 
 export default router;

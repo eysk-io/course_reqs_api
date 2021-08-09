@@ -36,10 +36,10 @@ export const createCourse = (courseModel, schoolModel) => async (req, res) => {
     }
 }
 
-export const getAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) => async (req, res) => {
+export const getAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
-        const courseDepartment = req.params.courseDepartment;
+        const subject = req.params.subject;
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -51,7 +51,7 @@ export const getAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) => 
         const doc = await courseModel
             .find({
                 school: schoolId,
-                department: courseDepartment
+                subject: subject
             })
             .lean()
             .exec();
@@ -65,10 +65,10 @@ export const getAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) => 
     }
 }
 
-export const removeAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) => async (req, res) => {
+export const removeAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
-        const courseDepartment = req.params.courseDepartment;
+        const subject = req.params.subject;
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -80,7 +80,7 @@ export const removeAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) 
         const doc = await courseModel
             .remove({
                 school: schoolId,
-                department: courseDepartment
+                subject: subject
             })
             .lean()
             .exec();
@@ -97,7 +97,7 @@ export const removeAllCoursesBySchoolAndDepartment = (courseModel, schoolModel) 
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
-        const courseDepartment = req.params.courseDepartment;
+        const subject = req.params.subject;
         const courseNumber = parseInt(req.params.courseNumber);
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
@@ -110,7 +110,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
         const doc = await courseModel
             .findOne({
                 school: schoolId,
-                department: courseDepartment,
+                subject: subject,
                 number: courseNumber
             })
             .lean()
@@ -145,12 +145,12 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
             return res.status(400).end();
         }
         const schoolId = schoolDoc.name;
-        const courseDepartment = req.params.courseDepartment;
+        const subject = req.params.subject;
         const courseNumber = req.params.courseNumber;
         const doc = await courseModel
             .findOneAndUpdate({
                 school: schoolId,
-                department: courseDepartment,
+                subject: subject,
                 number: courseNumber
             }, { ...req.body }
             )
@@ -177,12 +177,12 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
             return res.status(400).end();
         }
         const schoolId = schoolDoc.name;
-        const courseDepartment = req.params.courseDepartment;
+        const subject = req.params.subject;
         const courseNumber = req.params.courseNumber;
         const removedCourse = await courseModel
             .findOneAndRemove({
                 school: schoolId,
-                department: courseDepartment,
+                subject: subject,
                 number: courseNumber
             })
             .lean()
@@ -200,8 +200,8 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
 export const courseCrudControllers = (courseModel, schoolModel) => ({
     getAllCoursesBySchool: getAllCoursesBySchool(courseModel, schoolModel),
     createCourse: createCourse(courseModel, schoolModel),
-    getAllCoursesBySchoolAndDepartment: getAllCoursesBySchoolAndDepartment(courseModel, schoolModel),
-    removeAllCoursesBySchoolAndDepartment: removeAllCoursesBySchoolAndDepartment(courseModel, schoolModel),
+    getAllCoursesBySchoolAndSubject: getAllCoursesBySchoolAndSubject(courseModel, schoolModel),
+    removeAllCoursesBySchoolAndSubject: removeAllCoursesBySchoolAndSubject(courseModel, schoolModel),
     getCourse: getCourse(courseModel, schoolModel),
     updateCourse: updateCourse(courseModel, schoolModel),
     removeCourse: removeCourse(courseModel, schoolModel),
@@ -244,7 +244,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
         return courseObj;
     }
     const fullName = courseRequisite.split(/[ ]+/);
-    const courseDepartment = fullName[0];
+    const subject = fullName[0];
     let doc;
     if (
         !isNaN(fullName[1]) &&
@@ -254,7 +254,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
         doc = await courseModel
             .findOne({
                 school: schoolId,
-                department: courseDepartment,
+                subject: subject,
                 number: courseNumber
             })
             .lean()
@@ -266,7 +266,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
             preRequisites: [],
             coRequisites: [],
             equivalencies: [],
-            department: "",
+            subject: "",
             description: "",
             title: courseRequisite,
             number: -1,

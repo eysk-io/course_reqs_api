@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 
 describe("course model", () => {
     describe("schema", () => {
-        test("department", () => {
-            const department = Course.schema.obj.department
-            expect(department).toEqual({
+        test("subject", () => {
+            const subject = Course.schema.obj.subject
+            expect(subject).toEqual({
                 type: String,
                 required: true,
                 trim: true,
