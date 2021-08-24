@@ -75,5 +75,12 @@ describe("course model", () => {
                 required: true
             });
         });
+        test("notes", () => {
+            const notes = Course.schema.obj.notes;
+            expect(notes).toEqual({
+                type: String,
+                required: true
+            });
+        });
     });
 });

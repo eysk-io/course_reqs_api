@@ -41,6 +41,9 @@ const courseSchema = new mongoose.Schema(
         // [{ scoreOf: Number, metric: String, courses: [String] }] -> i.e. { scoreOf: 64, metric: "percentage", courses: [ "PHYS 157" ] }
         // { advancedCredit: [String] } -> i.e. { advancedCredit: ["MATH 103"] }
         // and any nested combination of these
+
+        // TODO: Add recommended to pre/coreqs and equivalencies
+        // TODO: add notes
         preRequisites: {
             type: [mongoose.Mixed],
             required: true
@@ -51,6 +54,10 @@ const courseSchema = new mongoose.Schema(
         },
         equivalencies: {
             type: [mongoose.Mixed],
+            required: true
+        },
+        notes: {
+            type: String,
             required: true
         }
     }

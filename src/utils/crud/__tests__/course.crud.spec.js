@@ -26,7 +26,9 @@ describe("course crud functions", async () => {
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     preRequisites: [],
-                    coRequisites: []
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none"
                 }
             };
             const expectedCourse = {
@@ -37,7 +39,9 @@ describe("course crud functions", async () => {
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: schoolModel.name,
                 preRequisites: [],
-                coRequisites: []
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
             };
             const res = {
                 status(status) {
@@ -50,10 +54,12 @@ describe("course crud functions", async () => {
                     expect(result.data.credits).toEqual(expectedCourse.credits);
                     expect(result.data.preRequisites).toHaveLength(0);
                     expect(result.data.coRequisites).toHaveLength(0);
+                    expect(result.data.equivalencies).toHaveLength(0);
+                    expect(result.data.notes).toEqual("none");
                 }
             }
             await createCourse(Course, School)(req, res);
-            expect.assertions(6);
+            expect.assertions(8);
         });
         test("400 if school not found", async () => {
             const req = {
@@ -95,7 +101,8 @@ describe("course crud functions", async () => {
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none"
             });
             const req = {
                 params: {
@@ -124,7 +131,8 @@ describe("course crud functions", async () => {
                 school: mongoose.Types.ObjectId(),
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none"
             });
             const req = {
                 params: "UBC"
@@ -173,7 +181,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: ["CPSC 103"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none"
             });
             const cpsc103 = await Course.create({
                 subject: "CPSC",
@@ -184,7 +193,8 @@ describe("course crud functions", async () => {
                 description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none"
             })
             const expectedCourse = {
                 subject: "CPSC",
@@ -204,12 +214,14 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: cpsc103._id
                     }
                 ],
                 coRequisites: [],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: cpsc107._id
             };
@@ -243,7 +255,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: ["CPSC 221"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc221 = await Course.create({
                 subject: "CPSC",
@@ -254,7 +267,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: ["CPSC 210"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc210 = await Course.create({
                 subject: "CPSC",
@@ -265,7 +279,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: ["CPSC 110"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
@@ -276,7 +291,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const expectedCourse = {
                 subject: "CPSC",
@@ -312,24 +328,28 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: cpsc110._id
                                     }
                                 ],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: cpsc210._id
                             }
                         ],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: cpsc221._id
                     }
                 ],
                 coRequisites: [],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: cpsc340._id
             };
@@ -369,7 +389,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
@@ -380,7 +401,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc107 = await Course.create({
                 subject: "CPSC",
@@ -391,7 +413,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: ["CPSC 103"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc103 = await Course.create({
                 subject: "CPSC",
@@ -402,7 +425,8 @@ describe("course crud functions", async () => {
                 credits: 3,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const expectedCourse = {
                 subject: "CPSC",
@@ -424,6 +448,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: cpsc110._id
                             },
@@ -445,12 +470,14 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: cpsc103._id
                                     }
                                 ],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: cpsc107._id
                             }
@@ -459,6 +486,7 @@ describe("course crud functions", async () => {
                 ],
                 coRequisites: [],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: cpsc210._id
             };
@@ -499,7 +527,8 @@ describe("course crud functions", async () => {
                         ]
                     }
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -510,7 +539,8 @@ describe("course crud functions", async () => {
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -521,7 +551,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -532,7 +563,8 @@ describe("course crud functions", async () => {
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const expectedCourse = {
                 subject: "PHYS",
@@ -552,6 +584,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: phys157._id
                     },
@@ -569,6 +602,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: math101._id
                             },
@@ -582,6 +616,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: math103._id
                             },
@@ -589,6 +624,7 @@ describe("course crud functions", async () => {
                     }
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: phys158._id
             };
@@ -635,7 +671,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -646,7 +683,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -657,7 +695,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -668,7 +707,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -699,6 +739,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: phys157._id
                             }
@@ -714,6 +755,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -727,6 +769,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     }
@@ -742,6 +785,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -755,11 +799,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -803,7 +849,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -814,7 +861,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -825,7 +873,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -836,7 +885,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -869,6 +919,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: phys157._id
                                     }
@@ -884,6 +935,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: math101._id
                             },
@@ -899,6 +951,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     }
@@ -914,6 +967,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -927,11 +981,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -975,7 +1031,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -986,7 +1043,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -997,7 +1055,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -1008,7 +1067,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1041,6 +1101,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -1054,6 +1115,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1071,6 +1133,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     }
@@ -1086,6 +1149,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -1099,11 +1163,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -1151,7 +1217,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -1162,7 +1229,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -1173,7 +1241,8 @@ describe("course crud functions", async () => {
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -1184,7 +1253,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1217,6 +1287,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -1230,6 +1301,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1249,6 +1321,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: math103._id
                             }
@@ -1266,6 +1339,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -1279,11 +1353,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -1331,7 +1407,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc210 = await Course.create({
                 subject: "CPSC",
@@ -1342,7 +1419,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: ["CPSC 110"],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
@@ -1353,7 +1431,8 @@ describe("course crud functions", async () => {
                 credits: 4,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
@@ -1364,7 +1443,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -1375,7 +1455,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -1386,7 +1467,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1419,6 +1501,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: math101._id
                                     },
@@ -1432,6 +1515,7 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: phys157._id
                                     },
@@ -1459,12 +1543,14 @@ describe("course crud functions", async () => {
                                         preRequisites: [],
                                         coRequisites: [],
                                         equivalencies: [],
+                                        notes: "none",
                                         __v: 0,
                                         _id: cpsc110._id
                                     }
                                 ],
                                 coRequisites: [],
                                 equivalencies: [],
+                                notes: "none",
                                 __v: 0,
                                 _id: cpsc210._id
                             }
@@ -1482,6 +1568,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -1495,11 +1582,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -1537,7 +1626,8 @@ describe("course crud functions", async () => {
                     "MATH 101",
                     "MATH 103"
                 ],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math101 = await Course.create({
                 subject: "MATH",
@@ -1548,7 +1638,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const math103 = await Course.create({
                 subject: "MATH",
@@ -1559,7 +1650,8 @@ describe("course crud functions", async () => {
                 school: school.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1607,6 +1699,7 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math101._id
                     },
@@ -1620,11 +1713,13 @@ describe("course crud functions", async () => {
                         preRequisites: [],
                         coRequisites: [],
                         equivalencies: [],
+                        notes: "none",
                         __v: 0,
                         _id: math103._id
                     },
                 ],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: math221._id
             };
@@ -1653,7 +1748,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1669,7 +1765,8 @@ describe("course crud functions", async () => {
                     credits: 4,
                     preRequisites: [],
                     coRequisites: [],
-                    equivalencies: []
+                    equivalencies: [],
+                    notes: "none",
                 }
             };
             const expectedCourse = {
@@ -1681,7 +1778,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             };
             const res = {
                 status(status) {
@@ -1721,7 +1819,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1737,7 +1836,8 @@ describe("course crud functions", async () => {
                     credits: 4,
                     preRequisites: [],
                     coRequisites: [],
-                    equivalencies: []
+                    equivalencies: [],
+                    notes: "none",
                 }
             };
             const res = {
@@ -1763,7 +1863,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1779,7 +1880,8 @@ describe("course crud functions", async () => {
                     credits: 4,
                     preRequisites: [],
                     coRequisites: [],
-                    equivalencies: []
+                    equivalencies: [],
+                    notes: "none",
                 }
             };
             const res = {
@@ -1807,7 +1909,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1826,6 +1929,7 @@ describe("course crud functions", async () => {
                 preRequisites: [],
                 coRequisites: [],
                 equivalencies: [],
+                notes: "none",
                 __v: 0,
                 _id: cpsc110._id
             };
@@ -1863,7 +1967,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1895,7 +2000,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const req = {
                 params: {
@@ -1929,7 +2035,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc111 = await Course.create({
                 subject: "CPSC",
@@ -1940,7 +2047,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc112 = await Course.create({
                 subject: "CPSC",
@@ -1951,7 +2059,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc113 = await Course.create({
                 subject: "CPSC",
@@ -1962,7 +2071,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const cpsc114 = await Course.create({
                 subject: "CPSC",
@@ -1973,7 +2083,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const expectedCourseList = [
                 {
@@ -1986,6 +2097,7 @@ describe("course crud functions", async () => {
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
+                    notes: "none",
                     __v: 0,
                     _id: cpsc110._id
                 },
@@ -1999,6 +2111,7 @@ describe("course crud functions", async () => {
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
+                    notes: "none",
                     __v: 0,
                     _id: cpsc111._id
                 },
@@ -2012,6 +2125,7 @@ describe("course crud functions", async () => {
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
+                    notes: "none",
                     __v: 0,
                     _id: cpsc112._id
                 },
@@ -2025,6 +2139,7 @@ describe("course crud functions", async () => {
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
+                    notes: "none",
                     __v: 0,
                     _id: cpsc113._id
                 },
@@ -2038,6 +2153,7 @@ describe("course crud functions", async () => {
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
+                    notes: "none",
                     __v: 0,
                     _id: cpsc114._id
                 }
@@ -2073,7 +2189,8 @@ describe("course crud functions", async () => {
                     credits: 4,
                     preRequisites: [],
                     coRequisites: [],
-                    equivalencies: []
+                    equivalencies: [],
+                    notes: "none",
                 }
             };
             const res = {
@@ -2101,7 +2218,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             await Course.create({
                 subject: "CPSC",
@@ -2112,7 +2230,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             await Course.create({
                 subject: "CPSC",
@@ -2123,7 +2242,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             await Course.create({
                 subject: "CPSC",
@@ -2134,7 +2254,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             await Course.create({
                 subject: "CPSC",
@@ -2145,7 +2266,8 @@ describe("course crud functions", async () => {
                 school: schoolModel.name,
                 preRequisites: [],
                 coRequisites: [],
-                equivalencies: []
+                equivalencies: [],
+                notes: "none",
             });
             const expectedResult = {
                 n: 5,
