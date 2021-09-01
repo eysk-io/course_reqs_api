@@ -20,7 +20,7 @@ app.use(urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // app.post("/signup", signup);
-app.post("/signin", signin);
+// app.post("/signin", signin);
 
 app.use("/api/school", schoolRouterUnprotected);
 app.use("/api/school", protect, schoolRouterProtected);
