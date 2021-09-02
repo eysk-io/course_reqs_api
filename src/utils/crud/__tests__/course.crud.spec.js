@@ -21,7 +21,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     credits: 4,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -33,7 +33,7 @@ describe("course crud functions", async () => {
             };
             const expectedCourse = {
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 credits: 4,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -50,7 +50,7 @@ describe("course crud functions", async () => {
                 },
                 json(result) {
                     expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
-                    expect(result.data.number).toEqual(expectedCourse.number);
+                    expect(result.data.code).toEqual(expectedCourse.code);
                     expect(result.data.credits).toEqual(expectedCourse.credits);
                     expect(result.data.preRequisites).toHaveLength(0);
                     expect(result.data.coRequisites).toHaveLength(0);
@@ -68,7 +68,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     credits: 4,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -94,7 +94,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const course = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 school: school.name,
                 credits: 4,
                 title: "Computation, Programs, and Programming",
@@ -124,7 +124,7 @@ describe("course crud functions", async () => {
         test("404 if school not found", async () => {
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 credits: 4,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -174,7 +174,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc107 = await Course.create({
                 subject: "CPSC",
-                number: 107,
+                code: 107,
                 school: school.name,
                 title: "Systematic Program Design",
                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
@@ -186,7 +186,7 @@ describe("course crud functions", async () => {
             });
             const cpsc103 = await Course.create({
                 subject: "CPSC",
-                number: 103,
+                code: 103,
                 school: school.name,
                 credits: 3,
                 title: "Introduction to Systematic Program Design",
@@ -198,7 +198,7 @@ describe("course crud functions", async () => {
             })
             const expectedCourse = {
                 subject: "CPSC",
-                number: 107,
+                code: 107,
                 school: school.name,
                 credits: 3,
                 title: "Systematic Program Design",
@@ -206,7 +206,7 @@ describe("course crud functions", async () => {
                 preRequisites: [
                     {
                         subject: "CPSC",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         title: "Introduction to Systematic Program Design",
                         description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
@@ -229,7 +229,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc107.subject,
-                    courseNumber: cpsc107.number
+                    courseNumber: cpsc107.code
                 }
             };
             const res = {
@@ -248,7 +248,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc340 = await Course.create({
                 subject: "CPSC",
-                number: 340,
+                code: 340,
                 school: school.name,
                 title: "Machine Learning and Data Mining",
                 description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
@@ -260,7 +260,7 @@ describe("course crud functions", async () => {
             });
             const cpsc221 = await Course.create({
                 subject: "CPSC",
-                number: 221,
+                code: 221,
                 school: school.name,
                 title: "Basic Algorithms and Data Structures",
                 description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
@@ -272,7 +272,7 @@ describe("course crud functions", async () => {
             });
             const cpsc210 = await Course.create({
                 subject: "CPSC",
-                number: 210,
+                code: 210,
                 school: school.name,
                 title: "Software Construction",
                 description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
@@ -284,7 +284,7 @@ describe("course crud functions", async () => {
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 school: school.name,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
@@ -296,7 +296,7 @@ describe("course crud functions", async () => {
             });
             const expectedCourse = {
                 subject: "CPSC",
-                number: 340,
+                code: 340,
                 school: school.name,
                 title: "Machine Learning and Data Mining",
                 description: "Models of algorithms for dimensionality reduction, nonlinear regression, classification, clustering and unsupervised learning; applications to computer graphics, computer games, bio-informatics, information retrieval, e-commerce, databases, computer vision and artificial intelligence.",
@@ -304,7 +304,7 @@ describe("course crud functions", async () => {
                 preRequisites: [
                     {
                         subject: "CPSC",
-                        number: 221,
+                        code: 221,
                         school: school.name,
                         title: "Basic Algorithms and Data Structures",
                         description: "Design and analysis of basic algorithms and data structures; algorithm analysis methods, searching and sorting algorithms, basic data structures, graphs and concurrency.",
@@ -312,7 +312,7 @@ describe("course crud functions", async () => {
                         preRequisites: [
                             {
                                 subject: "CPSC",
-                                number: 210,
+                                code: 210,
                                 school: school.name,
                                 title: "Software Construction",
                                 description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
@@ -320,7 +320,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [
                                     {
                                         subject: "CPSC",
-                                        number: 110,
+                                        code: 110,
                                         title: "Computation, Programs, and Programming",
                                         description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                         school: school.name,
@@ -357,7 +357,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc340.subject,
-                    courseNumber: cpsc340.number
+                    courseNumber: cpsc340.code
                 }
             };
             const res = {
@@ -376,7 +376,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc210 = await Course.create({
                 subject: "CPSC",
-                number: 210,
+                code: 210,
                 school: school.name,
                 title: "Software Construction",
                 description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
@@ -394,7 +394,7 @@ describe("course crud functions", async () => {
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: school.name,
@@ -406,7 +406,7 @@ describe("course crud functions", async () => {
             });
             const cpsc107 = await Course.create({
                 subject: "CPSC",
-                number: 107,
+                code: 107,
                 school: school.name,
                 title: "Systematic Program Design",
                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
@@ -418,7 +418,7 @@ describe("course crud functions", async () => {
             });
             const cpsc103 = await Course.create({
                 subject: "CPSC",
-                number: 103,
+                code: 103,
                 school: school.name,
                 title: "Introduction to Systematic Program Design",
                 description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
@@ -430,7 +430,7 @@ describe("course crud functions", async () => {
             });
             const expectedCourse = {
                 subject: "CPSC",
-                number: 210,
+                code: 210,
                 school: school.name,
                 title: "Software Construction",
                 description: "Design, development, and analysis of robust software components. Topics such as software design, computational models, data structures, debugging, and testing.",
@@ -440,7 +440,7 @@ describe("course crud functions", async () => {
                         oneOf: [
                             {
                                 subject: "CPSC",
-                                number: 110,
+                                code: 110,
                                 title: "Computation, Programs, and Programming",
                                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                 school: school.name,
@@ -454,7 +454,7 @@ describe("course crud functions", async () => {
                             },
                             {
                                 subject: "CPSC",
-                                number: 107,
+                                code: 107,
                                 title: "Systematic Program Design",
                                 description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
                                 school: school.name,
@@ -462,7 +462,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [
                                     {
                                         subject: "CPSC",
-                                        number: 103,
+                                        code: 103,
                                         school: school.name,
                                         title: "Introduction to Systematic Program Design",
                                         description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
@@ -494,7 +494,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc210.subject,
-                    courseNumber: cpsc210.number
+                    courseNumber: cpsc210.code
                 }
             };
             const res = {
@@ -513,7 +513,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const phys158 = await Course.create({
                 subject: "PHYS",
-                number: 158,
+                code: 158,
                 credits: 3,
                 school: school.name,
                 title: "Introductory Physics for Engineers II",
@@ -532,7 +532,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 school: school.name,
                 title: "Introductory Physics for Engineers I",
@@ -544,7 +544,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 school: school.name,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -556,7 +556,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 school: school.name,
                 title: "Integral Calculus with Applications to Life Sciences",
@@ -568,7 +568,7 @@ describe("course crud functions", async () => {
             });
             const expectedCourse = {
                 subject: "PHYS",
-                number: 158,
+                code: 158,
                 school: school.name,
                 title: "Introductory Physics for Engineers II",
                 description: "Electricity and magnetism, DC and AC circuits, optics. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -576,7 +576,7 @@ describe("course crud functions", async () => {
                 preRequisites: [
                     {
                         subject: "PHYS",
-                        number: 157,
+                        code: 157,
                         school: school.name,
                         title: "Introductory Physics for Engineers I",
                         description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -594,7 +594,7 @@ describe("course crud functions", async () => {
                         oneOf: [
                             {
                                 subject: "MATH",
-                                number: 101,
+                                code: 101,
                                 school: school.name,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -608,7 +608,7 @@ describe("course crud functions", async () => {
                             },
                             {
                                 subject: "MATH",
-                                number: 103,
+                                code: 103,
                                 school: school.name,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Life Sciences",
@@ -632,7 +632,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: phys158.subject,
-                    courseNumber: phys158.number
+                    courseNumber: phys158.code
                 }
             };
             const res = {
@@ -651,7 +651,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -676,7 +676,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -688,7 +688,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -700,7 +700,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -714,12 +714,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -731,7 +731,7 @@ describe("course crud functions", async () => {
                         courses: [
                             {
                                 subject: "PHYS",
-                                number: 157,
+                                code: 157,
                                 credits: 3,
                                 title: "Introductory Physics for Engineers I",
                                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -747,7 +747,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         credits: 3,
                         school: school.name,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -761,7 +761,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         credits: 3,
                         school: school.name,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -777,7 +777,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         school: school.name,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -791,7 +791,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         title: "Integral Calculus with Applications to Life Sciences",
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -825,7 +825,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -854,7 +854,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -866,7 +866,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -878,7 +878,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -892,12 +892,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -911,7 +911,7 @@ describe("course crud functions", async () => {
                                 courses: [
                                     {
                                         subject: "PHYS",
-                                        number: 157,
+                                        code: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
                                         description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -927,7 +927,7 @@ describe("course crud functions", async () => {
                             },
                             {
                                 subject: "MATH",
-                                number: 101,
+                                code: 101,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -943,7 +943,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -959,7 +959,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                         school: school.name,
@@ -973,7 +973,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1007,7 +1007,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1036,7 +1036,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1048,7 +1048,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1060,7 +1060,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
@@ -1074,12 +1074,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1093,7 +1093,7 @@ describe("course crud functions", async () => {
                                 oneOf: [
                                     {
                                         subject: "MATH",
-                                        number: 101,
+                                        code: 101,
                                         credits: 3,
                                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1107,7 +1107,7 @@ describe("course crud functions", async () => {
                                     },
                                     {
                                         subject: "PHYS",
-                                        number: 157,
+                                        code: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
                                         description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1125,7 +1125,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
                         description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1141,7 +1141,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1155,7 +1155,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1189,7 +1189,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1222,7 +1222,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1234,7 +1234,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 school: school.name,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1246,7 +1246,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1260,12 +1260,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1279,7 +1279,7 @@ describe("course crud functions", async () => {
                                 oneOf: [
                                     {
                                         subject: "MATH",
-                                        number: 101,
+                                        code: 101,
                                         credits: 3,
                                         school: school.name,
                                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1293,7 +1293,7 @@ describe("course crud functions", async () => {
                                     },
                                     {
                                         subject: "PHYS",
-                                        number: 157,
+                                        code: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
                                         description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1313,7 +1313,7 @@ describe("course crud functions", async () => {
                         advancedCredit: [
                             {
                                 subject: "MATH",
-                                number: 103,
+                                code: 103,
                                 credits: 3,
                                 title: "Integral Calculus with Applications to Life Sciences",
                                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1331,7 +1331,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1345,7 +1345,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1379,7 +1379,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1412,7 +1412,7 @@ describe("course crud functions", async () => {
             });
             const cpsc210 = await Course.create({
                 subject: "CPSC",
-                number: 210,
+                code: 210,
                 school: school.name,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1424,7 +1424,7 @@ describe("course crud functions", async () => {
             });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 school: school.name,
@@ -1436,7 +1436,7 @@ describe("course crud functions", async () => {
             });
             const phys157 = await Course.create({
                 subject: "PHYS",
-                number: 157,
+                code: 157,
                 credits: 3,
                 title: "Introductory Physics for Engineers I",
                 description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1448,7 +1448,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
                 credits: 3,
@@ -1460,7 +1460,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1474,12 +1474,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1493,7 +1493,7 @@ describe("course crud functions", async () => {
                                 oneOf: [
                                     {
                                         subject: "MATH",
-                                        number: 101,
+                                        code: 101,
                                         credits: 3,
                                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                                         description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1507,7 +1507,7 @@ describe("course crud functions", async () => {
                                     },
                                     {
                                         subject: "PHYS",
-                                        number: 157,
+                                        code: 157,
                                         credits: 3,
                                         title: "Introductory Physics for Engineers I",
                                         description: "Heat, thermodynamics, oscillations, waves, and sound. Please consult the Faculty of Science Credit Exclusion List: www.students.ubc.ca/calendar/index.cfm?tree=12,215,410,414.",
@@ -1527,7 +1527,7 @@ describe("course crud functions", async () => {
                         advancedCredit: [
                             {
                                 subject: "CPSC",
-                                number: 210,
+                                code: 210,
                                 school: school.name,
                                 title: "Matrix Algebra",
                                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1535,7 +1535,7 @@ describe("course crud functions", async () => {
                                 preRequisites: [
                                     {
                                         subject: "CPSC",
-                                        number: 110,
+                                        code: 110,
                                         title: "Computation, Programs, and Programming",
                                         description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                                         school: school.name,
@@ -1560,7 +1560,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1574,7 +1574,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1608,7 +1608,7 @@ describe("course crud functions", async () => {
             const school = await School.create({ name: "UBC" });
             const math221 = await Course.create({
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 credits: 3,
                 title: "Matrix Algebra",
                 description: "Systems of linear equations, operations on matrices, determinants, eigenvalues and eigenvectors, diagonalization of symmetric matrices. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1631,7 +1631,7 @@ describe("course crud functions", async () => {
             });
             const math101 = await Course.create({
                 subject: "MATH",
-                number: 101,
+                code: 101,
                 credits: 3,
                 title: "Integral Calculus with Applications to Physical Sciences and Engineering",
                 description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1643,7 +1643,7 @@ describe("course crud functions", async () => {
             });
             const math103 = await Course.create({
                 subject: "MATH",
-                number: 103,
+                code: 103,
                 credits: 3,
                 title: "Integral Calculus with Applications to Life Sciences",
                 description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
@@ -1657,12 +1657,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.number
+                    courseNumber: math221.code
                 }
             };
             const expectedCourse = {
                 subject: "MATH",
-                number: 221,
+                code: 221,
                 school: school.name,
                 credits: 3,
                 title: "Matrix Algebra",
@@ -1674,7 +1674,7 @@ describe("course crud functions", async () => {
                         courses: [
                             {
                                 subject: "",
-                                number: -1,
+                                code: -1,
                                 credits: 0,
                                 school: school.name,
                                 preRequisites: [],
@@ -1691,7 +1691,7 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         subject: "MATH",
-                        number: 101,
+                        code: 101,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Physical Sciences and Engineering",
@@ -1705,7 +1705,7 @@ describe("course crud functions", async () => {
                     },
                     {
                         subject: "MATH",
-                        number: 103,
+                        code: 103,
                         school: school.name,
                         credits: 3,
                         title: "Integral Calculus with Applications to Life Sciences",
@@ -1741,7 +1741,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 5,
@@ -1759,7 +1759,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
@@ -1771,7 +1771,7 @@ describe("course crud functions", async () => {
             };
             const expectedCourse = {
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 5,
@@ -1788,7 +1788,7 @@ describe("course crud functions", async () => {
                 },
                 json(result) {
                     expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
-                    expect(result.data.number).toEqual(expectedCourse.number);
+                    expect(result.data.code).toEqual(expectedCourse.code);
                     expect(result.data.credits).toEqual(expectedCourse.credits);
                     expect(result.data.preRequisites).toHaveLength(0);
                     expect(result.data.coRequisites).toHaveLength(0);
@@ -1812,7 +1812,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -1830,7 +1830,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
@@ -1856,7 +1856,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -1874,7 +1874,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
@@ -1902,7 +1902,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -1916,12 +1916,12 @@ describe("course crud functions", async () => {
                 params: {
                     school: schoolModel.name,
                     subject: cpsc110.subject,
-                    courseNumber: cpsc110.number,
+                    courseNumber: cpsc110.code,
                 }
             };
             const expectedCourse = {
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -1960,7 +1960,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -1974,7 +1974,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: "SFU",
                     subject: cpsc110.subject,
-                    courseNumber: cpsc110.number
+                    courseNumber: cpsc110.code
                 }
             };
             const res = {
@@ -1993,7 +1993,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -2028,7 +2028,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const cpsc110 = await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -2040,7 +2040,7 @@ describe("course crud functions", async () => {
             });
             const cpsc111 = await Course.create({
                 subject: "CPSC",
-                number: 111,
+                code: 111,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2052,7 +2052,7 @@ describe("course crud functions", async () => {
             });
             const cpsc112 = await Course.create({
                 subject: "CPSC",
-                number: 112,
+                code: 112,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2064,7 +2064,7 @@ describe("course crud functions", async () => {
             });
             const cpsc113 = await Course.create({
                 subject: "CPSC",
-                number: 113,
+                code: 113,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2076,7 +2076,7 @@ describe("course crud functions", async () => {
             });
             const cpsc114 = await Course.create({
                 subject: "CPSC",
-                number: 114,
+                code: 114,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2089,7 +2089,7 @@ describe("course crud functions", async () => {
             const expectedCourseList = [
                 {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
@@ -2103,7 +2103,7 @@ describe("course crud functions", async () => {
                 },
                 {
                     subject: "CPSC",
-                    number: 111,
+                    code: 111,
                     credits: 4,
                     title: "Any title",
                     description: "Any description",
@@ -2117,7 +2117,7 @@ describe("course crud functions", async () => {
                 },
                 {
                     subject: "CPSC",
-                    number: 112,
+                    code: 112,
                     credits: 4,
                     title: "Any title",
                     description: "Any description",
@@ -2131,7 +2131,7 @@ describe("course crud functions", async () => {
                 },
                 {
                     subject: "CPSC",
-                    number: 113,
+                    code: 113,
                     credits: 4,
                     title: "Any title",
                     description: "Any description",
@@ -2145,7 +2145,7 @@ describe("course crud functions", async () => {
                 },
                 {
                     subject: "CPSC",
-                    number: 114,
+                    code: 114,
                     credits: 4,
                     title: "Any title",
                     description: "Any description",
@@ -2183,7 +2183,7 @@ describe("course crud functions", async () => {
                 },
                 body: {
                     subject: "CPSC",
-                    number: 110,
+                    code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
@@ -2211,7 +2211,7 @@ describe("course crud functions", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             await Course.create({
                 subject: "CPSC",
-                number: 110,
+                code: 110,
                 title: "Computation, Programs, and Programming",
                 description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                 credits: 4,
@@ -2223,7 +2223,7 @@ describe("course crud functions", async () => {
             });
             await Course.create({
                 subject: "CPSC",
-                number: 111,
+                code: 111,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2235,7 +2235,7 @@ describe("course crud functions", async () => {
             });
             await Course.create({
                 subject: "CPSC",
-                number: 112,
+                code: 112,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2247,7 +2247,7 @@ describe("course crud functions", async () => {
             });
             await Course.create({
                 subject: "CPSC",
-                number: 113,
+                code: 113,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",
@@ -2259,7 +2259,7 @@ describe("course crud functions", async () => {
             });
             await Course.create({
                 subject: "CPSC",
-                number: 114,
+                code: 114,
                 credits: 4,
                 title: "Any title",
                 description: "Any description",

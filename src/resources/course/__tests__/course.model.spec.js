@@ -28,9 +28,9 @@ describe("course model", () => {
                 trim: true
             });
         });
-        test("number", () => {
-            const number = Course.schema.obj.number
-            expect(number).toEqual({
+        test("code", () => {
+            const code = Course.schema.obj.code
+            expect(code).toEqual({
                 type: Number,
                 required: true,
                 trim: true,

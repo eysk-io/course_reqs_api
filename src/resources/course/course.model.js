@@ -8,7 +8,7 @@ const courseSchema = new mongoose.Schema(
             trim: true,
             maxlength: 5
         },
-        number: {
+        code: {
             type: Number,
             required: true,
             trim: true,
@@ -64,7 +64,7 @@ const courseSchema = new mongoose.Schema(
 );
 
 courseSchema.index(
-    { school: 1, name: 1, number: 1 },
+    { school: 1, name: 1, code: 1 },
     { unique: true }
 );
 

@@ -111,7 +111,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
             .findOne({
                 school: schoolId,
                 subject: subject,
-                number: courseNumber
+                code: courseNumber
             })
             .lean()
             .exec();
@@ -151,7 +151,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
             .findOneAndUpdate({
                 school: schoolId,
                 subject: subject,
-                number: courseNumber
+                code: courseNumber
             }, { ...req.body }
             )
             .lean()
@@ -183,7 +183,7 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
             .findOneAndRemove({
                 school: schoolId,
                 subject: subject,
-                number: courseNumber
+                code: courseNumber
             })
             .lean()
             .exec();
@@ -255,7 +255,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
             .findOne({
                 school: schoolId,
                 subject: subject,
-                number: courseNumber
+                code: courseNumber
             })
             .lean()
             .exec();
@@ -269,7 +269,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
             subject: "",
             description: "",
             title: courseRequisite,
-            number: -1,
+            code: -1,
             credits: 0,
             school: schoolId,
             __v: 0
