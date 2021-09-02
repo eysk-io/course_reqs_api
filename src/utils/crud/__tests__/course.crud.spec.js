@@ -229,7 +229,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc107.subject,
-                    courseNumber: cpsc107.code
+                    courseCode: cpsc107.code
                 }
             };
             const res = {
@@ -357,7 +357,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc340.subject,
-                    courseNumber: cpsc340.code
+                    courseCode: cpsc340.code
                 }
             };
             const res = {
@@ -494,7 +494,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: cpsc210.subject,
-                    courseNumber: cpsc210.code
+                    courseCode: cpsc210.code
                 }
             };
             const res = {
@@ -632,7 +632,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: phys158.subject,
-                    courseNumber: phys158.code
+                    courseCode: phys158.code
                 }
             };
             const res = {
@@ -714,7 +714,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -892,7 +892,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -1074,7 +1074,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -1260,7 +1260,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -1474,7 +1474,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -1657,7 +1657,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: school.name,
                     subject: math221.subject,
-                    courseNumber: math221.code
+                    courseCode: math221.code
                 }
             };
             const expectedCourse = {
@@ -1755,7 +1755,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: schoolModel.name,
                     subject: "CPSC",
-                    courseNumber: 110
+                    courseCode: 110
                 },
                 body: {
                     subject: "CPSC",
@@ -1826,7 +1826,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: "SFU",
                     subject: "CPSC",
-                    courseNumber: 110
+                    courseCode: 110
                 },
                 body: {
                     subject: "CPSC",
@@ -1870,7 +1870,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: schoolModel.name,
                     subject: "CPSC",
-                    courseNumber: 111
+                    courseCode: 111
                 },
                 body: {
                     subject: "CPSC",
@@ -1916,7 +1916,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: schoolModel.name,
                     subject: cpsc110.subject,
-                    courseNumber: cpsc110.code,
+                    courseCode: cpsc110.code,
                 }
             };
             const expectedCourse = {
@@ -1974,7 +1974,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: "SFU",
                     subject: cpsc110.subject,
-                    courseNumber: cpsc110.code
+                    courseCode: cpsc110.code
                 }
             };
             const res = {
@@ -2007,7 +2007,7 @@ describe("course crud functions", async () => {
                 params: {
                     school: schoolModel.name,
                     subject: "CPSC",
-                    courseNumber: 111
+                    courseCode: 111
                 },
             };
             const res = {

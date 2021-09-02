@@ -13,9 +13,9 @@ router
     .route("/:school/:subject")
     .get(courseCrudControllers.getAllCoursesBySchoolAndSubject)
 
-// /api/course/:school/:subject/:courseNumber
+// /api/course/:school/:subject/:courseCode
 router
-    .route("/:school/:subject/:courseNumber")
+    .route("/:school/:subject/:courseCode")
     .get(courseCrudControllers.getCourse)
 
 export default router;

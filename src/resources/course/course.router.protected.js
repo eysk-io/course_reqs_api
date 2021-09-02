@@ -13,9 +13,9 @@ router
     .route("/:school/:subject")
     .delete(courseCrudControllers.removeAllCoursesBySchoolAndSubject)
 
-// /api/course/:school/:subject/:courseNumber
+// /api/course/:school/:subject/:courseCode
 router
-    .route("/:school/:subject/:courseNumber")
+    .route("/:school/:subject/:courseCode")
     .put(courseCrudControllers.updateCourse)
     .delete(courseCrudControllers.removeCourse)
 

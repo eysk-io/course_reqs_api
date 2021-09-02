@@ -5,8 +5,8 @@ describe("course protected router", () => {
         const routes = [
             { path: "/:school", method: "post" },
             { path: "/:school/:subject", method: "delete" },
-            { path: "/:school/:subject/:courseNumber", method: "put" },
-            { path: "/:school/:subject/:courseNumber", method: "delete" }
+            { path: "/:school/:subject/:courseCode", method: "put" },
+            { path: "/:school/:subject/:courseCode", method: "delete" }
         ];
 
         routes.forEach(route => {

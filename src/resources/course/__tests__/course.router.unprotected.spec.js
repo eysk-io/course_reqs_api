@@ -5,7 +5,7 @@ describe("course unprotected router", () => {
         const routes = [
             { path: "/:school", method: "get" },
             { path: "/:school/:subject", method: "get" },
-            { path: "/:school/:subject/:courseNumber", method: "get" }
+            { path: "/:school/:subject/:courseCode", method: "get" }
         ];
 
         routes.forEach(route => {

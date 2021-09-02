@@ -98,7 +98,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolName = req.params.school;
         const subject = req.params.subject;
-        const courseNumber = parseInt(req.params.courseNumber);
+        const courseCode = parseInt(req.params.courseCode);
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -111,7 +111,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
             .findOne({
                 school: schoolId,
                 subject: subject,
-                code: courseNumber
+                code: courseCode
             })
             .lean()
             .exec();
@@ -146,12 +146,12 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
         }
         const schoolId = schoolDoc.name;
         const subject = req.params.subject;
-        const courseNumber = req.params.courseNumber;
+        const courseCode = req.params.courseCode;
         const doc = await courseModel
             .findOneAndUpdate({
                 school: schoolId,
                 subject: subject,
-                code: courseNumber
+                code: courseCode
             }, { ...req.body }
             )
             .lean()
@@ -178,12 +178,12 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
         }
         const schoolId = schoolDoc.name;
         const subject = req.params.subject;
-        const courseNumber = req.params.courseNumber;
+        const courseCode = req.params.courseCode;
         const removedCourse = await courseModel
             .findOneAndRemove({
                 school: schoolId,
                 subject: subject,
-                code: courseNumber
+                code: courseCode
             })
             .lean()
             .exec();
@@ -250,12 +250,12 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
         !isNaN(fullName[1]) &&
         !isNaN(parseFloat(fullName[1]))
     ) {
-        const courseNumber = parseInt(fullName[1]);
+        const courseCode = parseInt(fullName[1]);
         doc = await courseModel
             .findOne({
                 school: schoolId,
                 subject: subject,
-                code: courseNumber
+                code: courseCode
             })
             .lean()
             .exec();
