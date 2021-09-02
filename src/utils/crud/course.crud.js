@@ -232,6 +232,15 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
                 courseObj.courses[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.courses[i]);
             }
         }
+        if (Object.keys(courseRequisite).includes("recommended")) {
+            let numCourses = courseRequisite.recommended.length;
+            courseObj = {
+                recommended: []
+            };
+            for (let i = 0; i < numCourses; i++) {
+                courseObj.recommended[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.recommended[i]);
+            }
+        }
         if (Object.keys(courseRequisite).includes("advancedCredit")) {
             let numCourses = courseRequisite.advancedCredit.length;
             courseObj = {

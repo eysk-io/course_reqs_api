@@ -1735,6 +1735,90 @@ describe("course crud functions", async () => {
             await getCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("find all courses by school with recommended prerequisites", async () => {
+            const school = await School.create({ name: "UBC" });
+            const cpsc107 = await Course.create({
+                subject: "CPSC",
+                code: 107,
+                school: school.name,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
+                credits: 3,
+                preRequisites: [
+                    {
+                        recommended: [
+                            "CPSC 103"
+                        ]
+                    }
+                ],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            });
+            const cpsc103 = await Course.create({
+                subject: "CPSC",
+                code: 103,
+                school: school.name,
+                credits: 3,
+                title: "Introduction to Systematic Program Design",
+                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            })
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 107,
+                school: school.name,
+                credits: 3,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
+                preRequisites: [
+                    {
+                        recommended: [
+                            {
+                                subject: "CPSC",
+                                code: 103,
+                                school: school.name,
+                                title: "Introduction to Systematic Program Design",
+                                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
+                                credits: 3,
+                                preRequisites: [],
+                                coRequisites: [],
+                                equivalencies: [],
+                                notes: "none",
+                                __v: 0,
+                                _id: cpsc103._id
+                            }
+                        ]
+                    }
+                ],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+                __v: 0,
+                _id: cpsc107._id
+            };
+            const req = {
+                params: {
+                    school: school.name,
+                    subject: cpsc107.subject,
+                    courseCode: cpsc107.code
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        });
     });
     describe("updateCourse", async () => {
         test("update a course's information", async () => {
