@@ -43,7 +43,6 @@ const courseSchema = new mongoose.Schema(
         // and any nested combination of these
 
         // TODO: Add recommended to pre/coreqs and equivalencies
-        // TODO: add notes
         preRequisites: {
             type: [mongoose.Mixed],
             required: true
