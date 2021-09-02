@@ -542,30 +542,6 @@ describe("course crud functions", async () => {
                 equivalencies: [],
                 notes: "none",
             });
-            const math101 = await Course.create({
-                subject: "MATH",
-                code: 101,
-                credits: 3,
-                school: school.name,
-                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none",
-            });
-            const math103 = await Course.create({
-                subject: "MATH",
-                code: 103,
-                credits: 3,
-                school: school.name,
-                title: "Integral Calculus with Applications to Life Sciences",
-                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none",
-            });
             const expectedCourse = {
                 subject: "PHYS",
                 code: 158,
@@ -592,34 +568,8 @@ describe("course crud functions", async () => {
                 coRequisites: [
                     {
                         oneOf: [
-                            {
-                                subject: "MATH",
-                                code: 101,
-                                school: school.name,
-                                credits: 3,
-                                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                                preRequisites: [],
-                                coRequisites: [],
-                                equivalencies: [],
-                                notes: "none",
-                                __v: 0,
-                                _id: math101._id
-                            },
-                            {
-                                subject: "MATH",
-                                code: 103,
-                                school: school.name,
-                                credits: 3,
-                                title: "Integral Calculus with Applications to Life Sciences",
-                                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                                preRequisites: [],
-                                coRequisites: [],
-                                equivalencies: [],
-                                notes: "none",
-                                __v: 0,
-                                _id: math103._id
-                            },
+                            "MATH 101",
+                            "MATH 103"
                         ]
                     }
                 ],
@@ -775,34 +725,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        school: school.name,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        credits: 3,
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        credits: 3,
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",
@@ -957,34 +881,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        school: school.name,
-                        credits: 3,
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",
@@ -1139,34 +1037,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",
@@ -1329,34 +1201,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",
@@ -1458,18 +1304,6 @@ describe("course crud functions", async () => {
                 equivalencies: [],
                 notes: "none",
             });
-            const math103 = await Course.create({
-                subject: "MATH",
-                code: 103,
-                credits: 3,
-                title: "Integral Calculus with Applications to Life Sciences",
-                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                school: school.name,
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none",
-            });
             const req = {
                 params: {
                     school: school.name,
@@ -1558,34 +1392,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",
@@ -1629,30 +1437,6 @@ describe("course crud functions", async () => {
                 equivalencies: [],
                 notes: "none",
             });
-            const math101 = await Course.create({
-                subject: "MATH",
-                code: 101,
-                credits: 3,
-                title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                school: school.name,
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none",
-            });
-            const math103 = await Course.create({
-                subject: "MATH",
-                code: 103,
-                credits: 3,
-                title: "Integral Calculus with Applications to Life Sciences",
-                description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                school: school.name,
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none",
-            });
             const req = {
                 params: {
                     school: school.name,
@@ -1689,34 +1473,8 @@ describe("course crud functions", async () => {
                     }
                 ],
                 coRequisites: [
-                    {
-                        subject: "MATH",
-                        code: 101,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Physical Sciences and Engineering",
-                        description: "The definite integral, integration techniques, applications, modelling, infinite series. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math101._id
-                    },
-                    {
-                        subject: "MATH",
-                        code: 103,
-                        school: school.name,
-                        credits: 3,
-                        title: "Integral Calculus with Applications to Life Sciences",
-                        description: "Antiderivatives and definite integrals, infinite series, applications to probability and dynamical systems. Please consult the Faculty of Science Credit Exclusion List: www.calendar.ubc.ca/vancouver/index.cfm?tree=12,215,410,414.",
-                        preRequisites: [],
-                        coRequisites: [],
-                        equivalencies: [],
-                        notes: "none",
-                        __v: 0,
-                        _id: math103._id
-                    },
+                    "MATH 101",
+                    "MATH 103"
                 ],
                 equivalencies: [],
                 notes: "none",

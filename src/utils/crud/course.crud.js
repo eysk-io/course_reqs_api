@@ -118,14 +118,9 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
         if (!doc) {
             return res.status(400).end();
         }
+        let courses = new Map();
         for (let i = 0; i < doc.preRequisites.length; i++) {
-            doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i]);
-        }
-        for (let i = 0; i < doc.coRequisites.length; i++) {
-            doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
-        }
-        for (let i = 0; i < doc.equivalencies.length; i++) {
-            doc.equivalencies[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.equivalencies[i]);
+            doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i], courses);
         }
         return res.status(200).json({ data: doc });
     } catch (e) {
@@ -207,14 +202,14 @@ export const courseCrudControllers = (courseModel, schoolModel) => ({
     removeCourse: removeCourse(courseModel, schoolModel),
 });
 
-const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseRequisite) => {
+const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseRequisite, courses) => {
     if (typeof (courseRequisite) !== "string") {
         let courseObj = {};
         if (Object.keys(courseRequisite).includes("oneOf")) {
             let oneOfListLength = courseRequisite.oneOf.length
             courseObj.oneOf = [];
             for (let i = 0; i < oneOfListLength; i++) {
-                courseObj.oneOf[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.oneOf[i]);
+                courseObj.oneOf[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.oneOf[i], courses);
             }
         }
         if (
@@ -229,7 +224,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
                 courses: []
             };
             for (let i = 0; i < numCourses; i++) {
-                courseObj.courses[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.courses[i]);
+                courseObj.courses[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.courses[i], courses);
             }
         }
         if (Object.keys(courseRequisite).includes("recommended")) {
@@ -238,7 +233,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
                 recommended: []
             };
             for (let i = 0; i < numCourses; i++) {
-                courseObj.recommended[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.recommended[i]);
+                courseObj.recommended[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.recommended[i], courses);
             }
         }
         if (Object.keys(courseRequisite).includes("advancedCredit")) {
@@ -247,11 +242,16 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
                 advancedCredit: []
             };
             for (let i = 0; i < numCourses; i++) {
-                courseObj.advancedCredit[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.advancedCredit[i]);
+                courseObj.advancedCredit[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.advancedCredit[i], courses);
             }
         }
         return courseObj;
     }
+
+    if (courses.has(courseRequisite)) {
+        return courses.get(courseRequisite);
+    }
+
     const fullName = courseRequisite.split(/[ ]+/);
     const subject = fullName[0];
     let doc;
@@ -286,13 +286,10 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
         return courseObj;
     }
     for (let i = 0; i < doc.preRequisites.length; i++) {
-        doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i]);
+        doc.preRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.preRequisites[i], courses);
     }
-    for (let i = 0; i < doc.coRequisites.length; i++) {
-        doc.coRequisites[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.coRequisites[i]);
-    }
-    for (let i = 0; i < doc.equivalencies.length; i++) {
-        doc.equivalencies[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, doc.equivalencies[i]);
-    }
+
+    courses.set(courseRequisite, doc)
+
     return doc;
 }
