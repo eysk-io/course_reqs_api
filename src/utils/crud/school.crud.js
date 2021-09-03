@@ -61,7 +61,7 @@ export const updateSchool = model => async (req, res) => {
 export const removeSchool = model => async (req, res) => {
     try {
         const removedSchool = await model.findOneAndRemove({
-            name: req.params.schoolName
+            name: (req.params.schoolName).toUpperCase()
         });
 
         if (!removedSchool) {

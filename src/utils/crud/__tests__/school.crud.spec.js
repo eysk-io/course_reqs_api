@@ -238,5 +238,25 @@ describe("school crud functions", () => {
             await removeSchool(School)(req, res);
             expect.assertions(1);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    schoolName: "ubc"
+                }
+            };
+
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.name).toBe(school.name);
+                }
+            };
+            await removeSchool(School)(req, res);
+            expect.assertions(2);
+        });
     });
 });
