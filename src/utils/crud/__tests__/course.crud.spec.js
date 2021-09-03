@@ -1866,6 +1866,77 @@ describe("course crud functions", async () => {
             await updateCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 5,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const req = {
+                params: {
+                    school: "uBC",
+                    subject: "cPSC",
+                    courseCode: 110
+                },
+                body: {
+                    subject: "CPSC",
+                    code: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                    credits: 4,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 5,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
+                    expect(result.data.code).toEqual(expectedCourse.code);
+                    expect(result.data.credits).toEqual(expectedCourse.credits);
+                    expect(result.data.preRequisites).toHaveLength(0);
+                    expect(result.data.coRequisites).toHaveLength(0);
+                }
+            }
+            await updateCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.credits).toEqual(req.body.credits);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(8);
+        });
     });
     describe("removeCourse", async () => {
         test("remove a course", async () => {

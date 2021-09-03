@@ -131,7 +131,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
 
 export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
+        const schoolName = (req.params.school).toUpperCase();
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -140,7 +140,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
             return res.status(400).end();
         }
         const schoolId = schoolDoc.name;
-        const subject = req.params.subject;
+        const subject = (req.params.subject).toUpperCase();
         const courseCode = req.params.courseCode;
         const doc = await courseModel
             .findOneAndUpdate({
