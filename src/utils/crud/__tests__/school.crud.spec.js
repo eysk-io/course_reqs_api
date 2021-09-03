@@ -44,6 +44,26 @@ describe("school crud functions", () => {
             await getSchool(School)(req, res);
             expect.assertions(3);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    schoolName: "uBc"
+                }
+            }
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data._id.toString()).toBe(school._id.toString());
+                    expect(result.data.name.toString()).toBe(school.name.toString());
+                }
+            }
+            await getSchool(School)(req, res);
+            expect.assertions(3);
+        });
     });
     describe("getAllSchools", async () => {
         test("get all schools", async () => {
