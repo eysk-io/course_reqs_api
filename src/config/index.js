@@ -26,6 +26,7 @@ switch (env) {
   case 'prod':
   case 'production':
     envConfig = require('./prod').config;
+    envConfig.port = (process.env.PORT || 3000)
     break;
   default:
     envConfig = require('./dev').config;
