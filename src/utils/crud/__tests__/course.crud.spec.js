@@ -13,6 +13,54 @@ import mongoose from "mongoose";
 
 describe("course crud functions", async () => {
     describe("createCourse", async () => {
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    school: "uBc"
+                },
+                body: {
+                    subject: "CPSC",
+                    code: 110,
+                    credits: 4,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none"
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(201);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
+                    expect(result.data.code).toEqual(expectedCourse.code);
+                    expect(result.data.credits).toEqual(expectedCourse.credits);
+                    expect(result.data.preRequisites).toHaveLength(0);
+                    expect(result.data.coRequisites).toHaveLength(0);
+                    expect(result.data.equivalencies).toHaveLength(0);
+                    expect(result.data.notes).toEqual("none");
+                }
+            }
+            await createCourse(Course, School)(req, res);
+            expect.assertions(8);
+        });
         test("create one simple course", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const req = {
@@ -90,6 +138,37 @@ describe("course crud functions", async () => {
         });
     });
     describe("getAllCoursesBySchool", async () => {
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const course = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                school: school.name,
+                credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            });
+            const req = {
+                params: {
+                    school: "uBc"
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data[0]._id.toString()).toBe(course._id.toString());
+                }
+            }
+            await getAllCoursesBySchool(Course, School)(req, res);
+            expect.assertions(2);
+        });
         test("find all courses by school with no pre- or co-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const course = await Course.create({
@@ -135,7 +214,9 @@ describe("course crud functions", async () => {
                 notes: "none"
             });
             const req = {
-                params: "UBC"
+                params: {
+                    school: "UBC"
+                }
             };
             const res = {
                 status(status) {
@@ -170,6 +251,53 @@ describe("course crud functions", async () => {
         });
     });
     describe("getCourse", async () => {
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const cpsc107 = await Course.create({
+                subject: "CPSC",
+                code: 107,
+                school: school.name,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
+                credits: 3,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            });
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 107,
+                school: school.name,
+                credits: 3,
+                title: "Systematic Program Design",
+                description: "Fundamental computation and program structures. Continuing systematic program design from CPSC 103.",
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+                __v: 0,
+                _id: cpsc107._id
+            };
+            const req = {
+                params: {
+                    school: "ubC",
+                    subject: "cPsC",
+                    courseCode: cpsc107.code
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await getCourse(Course, School)(req, res);
+            expect.assertions(2);
+        })
         test("find all courses by school with one unnested pre-req", async () => {
             const school = await School.create({ name: "UBC" });
             const cpsc107 = await Course.create({
@@ -1738,6 +1866,77 @@ describe("course crud functions", async () => {
             await updateCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 5,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const req = {
+                params: {
+                    school: "uBC",
+                    subject: "cPSC",
+                    courseCode: 110
+                },
+                body: {
+                    subject: "CPSC",
+                    code: 110,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                    credits: 4,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 5,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
+                    expect(result.data.code).toEqual(expectedCourse.code);
+                    expect(result.data.credits).toEqual(expectedCourse.credits);
+                    expect(result.data.preRequisites).toHaveLength(0);
+                    expect(result.data.coRequisites).toHaveLength(0);
+                }
+            }
+            await updateCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.credits).toEqual(req.body.credits);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(8);
+        });
     });
     describe("removeCourse", async () => {
         test("remove a course", async () => {
@@ -1863,6 +2062,64 @@ describe("course crud functions", async () => {
             }
             await removeCourse(Course, School)(req, res);
             expect.assertions(2);
+        });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const req = {
+                params: {
+                    school: "ubc",
+                    subject: "cpSc",
+                    courseCode: cpsc110.code,
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+                __v: 0,
+                _id: cpsc110._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await removeCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(4);
         });
     });
     describe("getAllCoursesBySchoolAndSubject", async () => {
@@ -2018,21 +2275,163 @@ describe("course crud functions", async () => {
             await getAllCoursesBySchoolAndSubject(Course, School)(req, res);
             expect.assertions(2);
         });
-        test("404 if school not found", async () => {
-            const req = {
-                params: {
-                    school: "UBC"
-                },
-                body: {
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc111 = await Course.create({
+                subject: "CPSC",
+                code: 111,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc112 = await Course.create({
+                subject: "CPSC",
+                code: 112,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc113 = await Course.create({
+                subject: "CPSC",
+                code: 113,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc114 = await Course.create({
+                subject: "CPSC",
+                code: 114,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const expectedCourseList = [
+                {
                     subject: "CPSC",
                     code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
+                    school: schoolModel.name,
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
                     notes: "none",
+                    __v: 0,
+                    _id: cpsc110._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 111,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc111._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 112,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc112._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 113,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc113._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 114,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc114._id
+                }
+            ]
+            const req = {
+                params: {
+                    school: "UbC",
+                    subject: "cPSC",
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourseList);
+                }
+            };
+            await getAllCoursesBySchoolAndSubject(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("404 if school not found", async () => {
+            const req = {
+                params: {
+                    school: "UBC",
+                    subject: "CPSC"
                 }
             };
             const res = {
@@ -2164,6 +2563,103 @@ describe("course crud functions", async () => {
             }
             await removeAllCoursesBySchoolAndSubject(Course, School)(req, res);
             expect.assertions(2);
+        });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 111,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 112,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 113,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 114,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const expectedResult = {
+                n: 5,
+                ok: 1,
+                deletedCount: 5
+            }
+
+            const req = {
+                params: {
+                    school: "ubc",
+                    subject: "cpsc",
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedResult);
+                }
+            };
+            await removeAllCoursesBySchoolAndSubject(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual([]);
+                }
+            };
+            await getAllCoursesBySchoolAndSubject(Course, School)(req, newRes);
+            expect.assertions(4);
         });
     });
 });

@@ -1,7 +1,7 @@
 export const getAllCoursesBySchool = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolDoc = await schoolModel
-            .findOne({ name: req.params.school })
+            .findOne({ name: (req.params.school).toUpperCase() })
             .lean()
             .exec();
         if (!schoolDoc) {
@@ -21,7 +21,7 @@ export const getAllCoursesBySchool = (courseModel, schoolModel) => async (req, r
 export const createCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolDoc = await schoolModel
-            .findOne({ name: req.params.school })
+            .findOne({ name: (req.params.school).toUpperCase() })
             .lean()
             .exec();
         if (!schoolDoc) {
@@ -38,8 +38,8 @@ export const createCourse = (courseModel, schoolModel) => async (req, res) => {
 
 export const getAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
-        const subject = req.params.subject;
+        const schoolName = (req.params.school).toUpperCase();
+        const subject = (req.params.subject).toUpperCase();
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -67,8 +67,8 @@ export const getAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => asy
 
 export const removeAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
-        const subject = req.params.subject;
+        const schoolName = (req.params.school).toUpperCase();
+        const subject = (req.params.subject).toUpperCase();
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -96,8 +96,8 @@ export const removeAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => 
 
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
-        const subject = req.params.subject;
+        const schoolName = (req.params.school).toUpperCase();
+        const subject = (req.params.subject).toUpperCase();
         const courseCode = parseInt(req.params.courseCode);
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
@@ -131,7 +131,7 @@ export const getCourse = (courseModel, schoolModel) => async (req, res) => {
 
 export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
+        const schoolName = (req.params.school).toUpperCase();
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -140,7 +140,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
             return res.status(400).end();
         }
         const schoolId = schoolDoc.name;
-        const subject = req.params.subject;
+        const subject = (req.params.subject).toUpperCase();
         const courseCode = req.params.courseCode;
         const doc = await courseModel
             .findOneAndUpdate({
@@ -163,7 +163,7 @@ export const updateCourse = (courseModel, schoolModel) => async (req, res) => {
 
 export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
+        const schoolName = (req.params.school).toUpperCase();
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
             .lean()
@@ -172,7 +172,7 @@ export const removeCourse = (courseModel, schoolModel) => async (req, res) => {
             return res.status(400).end();
         }
         const schoolId = schoolDoc.name;
-        const subject = req.params.subject;
+        const subject = (req.params.subject).toUpperCase();
         const courseCode = req.params.courseCode;
         const removedCourse = await courseModel
             .findOneAndRemove({
