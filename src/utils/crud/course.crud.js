@@ -245,6 +245,12 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
                 courseObj.advancedCredit[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite.advancedCredit[i], courses);
             }
         }
+        if (Array.isArray(courseRequisite)) {
+            courseObj = [];
+            for (let i = 0; i < courseRequisite.length; i++) {
+                courseObj[i] = await getCourseHelper(courseModel, schoolModel)(schoolId, courseRequisite[i], courses);
+            }
+        }
         return courseObj;
     }
 
