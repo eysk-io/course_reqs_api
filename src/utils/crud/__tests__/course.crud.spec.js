@@ -2435,5 +2435,102 @@ describe("course crud functions", async () => {
             await removeAllCoursesBySchoolAndSubject(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 111,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 112,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 113,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            await Course.create({
+                subject: "CPSC",
+                code: 114,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const expectedResult = {
+                n: 5,
+                ok: 1,
+                deletedCount: 5
+            }
+
+            const req = {
+                params: {
+                    school: "ubc",
+                    subject: "cpsc",
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedResult);
+                }
+            };
+            await removeAllCoursesBySchoolAndSubject(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual([]);
+                }
+            };
+            await getAllCoursesBySchoolAndSubject(Course, School)(req, newRes);
+            expect.assertions(4);
+        });
     });
 });
