@@ -96,8 +96,8 @@ export const removeAllCoursesBySchoolAndSubject = (courseModel, schoolModel) => 
 
 export const getCourse = (courseModel, schoolModel) => async (req, res) => {
     try {
-        const schoolName = req.params.school;
-        const subject = req.params.subject;
+        const schoolName = (req.params.school).toUpperCase();
+        const subject = (req.params.subject).toUpperCase();
         const courseCode = parseInt(req.params.courseCode);
         const schoolDoc = await schoolModel
             .findOne({ name: schoolName })
