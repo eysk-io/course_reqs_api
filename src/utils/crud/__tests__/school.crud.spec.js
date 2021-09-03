@@ -23,8 +23,7 @@ describe("school crud functions", () => {
             await getSchool(School)(req, res);
             expect.assertions(3);
         });
-
-        await test("404 if school does not exist", async () => {
+        test("404 if school does not exist", async () => {
             const school = await School.create({ name: "UBC" });
             const req = {
                 params: {
