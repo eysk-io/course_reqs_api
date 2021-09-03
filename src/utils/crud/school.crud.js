@@ -41,7 +41,7 @@ export const updateSchool = model => async (req, res) => {
         const updatedSchool = await model
             .findOneAndUpdate(
                 {
-                    name: req.params.schoolName
+                    name: (req.params.schoolName).toUpperCase()
                 },
                 req.body,
                 { new: true }
