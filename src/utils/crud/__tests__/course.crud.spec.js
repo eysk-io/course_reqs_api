@@ -2063,6 +2063,64 @@ describe("course crud functions", async () => {
             await removeCourse(Course, School)(req, res);
             expect.assertions(2);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const req = {
+                params: {
+                    school: "ubc",
+                    subject: "cpSc",
+                    courseCode: cpsc110.code,
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+                __v: 0,
+                _id: cpsc110._id
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourse);
+                }
+            }
+            await removeCourse(Course, School)(req, res);
+
+            const newRes = {
+                status(status) {
+                    expect(status).toBe(400);
+                    return this;
+                },
+                end() {
+                    expect(true).toBe(true);
+                }
+            }
+            await getCourse(Course, School)(req, newRes);
+            expect.assertions(4);
+        });
     });
     describe("getAllCoursesBySchoolAndSubject", async () => {
         test("get list of courses by school and name", async () => {
