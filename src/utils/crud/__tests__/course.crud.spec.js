@@ -13,6 +13,54 @@ import mongoose from "mongoose";
 
 describe("course crud functions", async () => {
     describe("createCourse", async () => {
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    school: "uBc"
+                },
+                body: {
+                    subject: "CPSC",
+                    code: 110,
+                    credits: 4,
+                    title: "Computation, Programs, and Programming",
+                    description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none"
+                }
+            };
+            const expectedCourse = {
+                subject: "CPSC",
+                code: 110,
+                credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(201);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.subject.toString()).toEqual(expectedCourse.subject.toString());
+                    expect(result.data.code).toEqual(expectedCourse.code);
+                    expect(result.data.credits).toEqual(expectedCourse.credits);
+                    expect(result.data.preRequisites).toHaveLength(0);
+                    expect(result.data.coRequisites).toHaveLength(0);
+                    expect(result.data.equivalencies).toHaveLength(0);
+                    expect(result.data.notes).toEqual("none");
+                }
+            }
+            await createCourse(Course, School)(req, res);
+            expect.assertions(8);
+        });
         test("create one simple course", async () => {
             const schoolModel = await School.create({ name: "UBC" });
             const req = {
