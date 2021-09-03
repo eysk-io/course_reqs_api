@@ -2146,21 +2146,163 @@ describe("course crud functions", async () => {
             await getAllCoursesBySchoolAndSubject(Course, School)(req, res);
             expect.assertions(2);
         });
-        test("404 if school not found", async () => {
-            const req = {
-                params: {
-                    school: "UBC"
-                },
-                body: {
+        test("ensure parameters are case agnostic", async () => {
+            const schoolModel = await School.create({ name: "UBC" });
+            const cpsc110 = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                credits: 4,
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc111 = await Course.create({
+                subject: "CPSC",
+                code: 111,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc112 = await Course.create({
+                subject: "CPSC",
+                code: 112,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc113 = await Course.create({
+                subject: "CPSC",
+                code: 113,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const cpsc114 = await Course.create({
+                subject: "CPSC",
+                code: 114,
+                credits: 4,
+                title: "Any title",
+                description: "Any description",
+                school: schoolModel.name,
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none",
+            });
+            const expectedCourseList = [
+                {
                     subject: "CPSC",
                     code: 110,
                     title: "Computation, Programs, and Programming",
                     description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
                     credits: 4,
+                    school: schoolModel.name,
                     preRequisites: [],
                     coRequisites: [],
                     equivalencies: [],
                     notes: "none",
+                    __v: 0,
+                    _id: cpsc110._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 111,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc111._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 112,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc112._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 113,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc113._id
+                },
+                {
+                    subject: "CPSC",
+                    code: 114,
+                    credits: 4,
+                    title: "Any title",
+                    description: "Any description",
+                    school: schoolModel.name,
+                    preRequisites: [],
+                    coRequisites: [],
+                    equivalencies: [],
+                    notes: "none",
+                    __v: 0,
+                    _id: cpsc114._id
+                }
+            ]
+            const req = {
+                params: {
+                    school: "UbC",
+                    subject: "cPSC",
+                },
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data).toEqual(expectedCourseList);
+                }
+            };
+            await getAllCoursesBySchoolAndSubject(Course, School)(req, res);
+            expect.assertions(2);
+        });
+        test("404 if school not found", async () => {
+            const req = {
+                params: {
+                    school: "UBC",
+                    subject: "CPSC"
                 }
             };
             const res = {
