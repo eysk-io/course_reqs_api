@@ -1,7 +1,7 @@
 export const getSchool = model => async (req, res) => {
     try {
         const doc = await model
-            .findOne({ name: req.params.schoolName })
+            .findOne({ name: (req.params.schoolName).toUpperCase() })
             .lean()
             .exec();
 
@@ -41,7 +41,7 @@ export const updateSchool = model => async (req, res) => {
         const updatedSchool = await model
             .findOneAndUpdate(
                 {
-                    name: req.params.schoolName
+                    name: (req.params.schoolName).toUpperCase()
                 },
                 req.body,
                 { new: true }
@@ -61,7 +61,7 @@ export const updateSchool = model => async (req, res) => {
 export const removeSchool = model => async (req, res) => {
     try {
         const removedSchool = await model.findOneAndRemove({
-            name: req.params.schoolName
+            name: (req.params.schoolName).toUpperCase()
         });
 
         if (!removedSchool) {

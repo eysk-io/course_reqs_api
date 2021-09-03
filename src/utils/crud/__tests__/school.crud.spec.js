@@ -44,6 +44,26 @@ describe("school crud functions", () => {
             await getSchool(School)(req, res);
             expect.assertions(3);
         });
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    schoolName: "uBc"
+                }
+            }
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data._id.toString()).toBe(school._id.toString());
+                    expect(result.data.name.toString()).toBe(school.name.toString());
+                }
+            }
+            await getSchool(School)(req, res);
+            expect.assertions(3);
+        });
     });
     describe("getAllSchools", async () => {
         test("get all schools", async () => {
@@ -155,6 +175,30 @@ describe("school crud functions", () => {
             await updateSchool(School)(req, res);
             expect.assertions(1);
         });
+        test("ensure parameters are case agnostic", async () => {
+            await School.create({ name: "UBC" });
+            const newName = "SFU";
+            const req = {
+                params: {
+                    schoolName: "ubC"
+                },
+                body: {
+                    name: newName
+                }
+            };
+
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.name).toBe(newName);
+                }
+            };
+            await updateSchool(School)(req, res);
+            expect.assertions(2);
+        });
     });
     describe("removeSchool", async () => {
         test("remove an existing school", async () => {
@@ -193,6 +237,26 @@ describe("school crud functions", () => {
             };
             await removeSchool(School)(req, res);
             expect.assertions(1);
+        });
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const req = {
+                params: {
+                    schoolName: "ubc"
+                }
+            };
+
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data.name).toBe(school.name);
+                }
+            };
+            await removeSchool(School)(req, res);
+            expect.assertions(2);
         });
     });
 });
