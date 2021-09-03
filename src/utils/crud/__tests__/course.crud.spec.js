@@ -90,6 +90,37 @@ describe("course crud functions", async () => {
         });
     });
     describe("getAllCoursesBySchool", async () => {
+        test("ensure parameters are case agnostic", async () => {
+            const school = await School.create({ name: "UBC" });
+            const course = await Course.create({
+                subject: "CPSC",
+                code: 110,
+                school: school.name,
+                credits: 4,
+                title: "Computation, Programs, and Programming",
+                description: "Fundamental program and computation structures. Introductory programming skills. Computation as a tool for information processing, simulation and modelling, and interacting with the world.",
+                preRequisites: [],
+                coRequisites: [],
+                equivalencies: [],
+                notes: "none"
+            });
+            const req = {
+                params: {
+                    school: "uBc"
+                }
+            };
+            const res = {
+                status(status) {
+                    expect(status).toBe(200);
+                    return this;
+                },
+                json(result) {
+                    expect(result.data[0]._id.toString()).toBe(course._id.toString());
+                }
+            }
+            await getAllCoursesBySchool(Course, School)(req, res);
+            expect.assertions(2);
+        });
         test("find all courses by school with no pre- or co-reqs", async () => {
             const school = await School.create({ name: "UBC" });
             const course = await Course.create({
@@ -135,7 +166,9 @@ describe("course crud functions", async () => {
                 notes: "none"
             });
             const req = {
-                params: "UBC"
+                params: {
+                    school: "UBC"
+                }
             };
             const res = {
                 status(status) {

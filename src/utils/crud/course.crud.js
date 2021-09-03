@@ -1,7 +1,7 @@
 export const getAllCoursesBySchool = (courseModel, schoolModel) => async (req, res) => {
     try {
         const schoolDoc = await schoolModel
-            .findOne({ name: req.params.school })
+            .findOne({ name: (req.params.school).toUpperCase() })
             .lean()
             .exec();
         if (!schoolDoc) {
