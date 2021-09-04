@@ -3,17 +3,17 @@ import courseCrudControllers from "./course.controllers";
 
 const router = Router();
 
-// /api/course/:school
+// /course/:school
 router
     .route("/:school")
     .get(courseCrudControllers.getAllCoursesBySchool)
 
-// /api/course/:school/:subject
+// /course/:school/:subject
 router
     .route("/:school/:subject")
     .get(courseCrudControllers.getAllCoursesBySchoolAndSubject)
 
-// /api/course/:school/:subject/:courseCode
+// /course/:school/:subject/:courseCode
 router
     .route("/:school/:subject/:courseCode")
     .get(courseCrudControllers.getCourse)

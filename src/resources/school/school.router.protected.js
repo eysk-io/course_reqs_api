@@ -3,12 +3,12 @@ import schoolCrudControllers from "./school.controllers";
 
 const router = Router();
 
-// /api/school
+// /school
 router
     .route("/")
     .post(schoolCrudControllers.createSchool)
 
-// /api/school/:schoolName
+// /school/:schoolName
 router
     .route("/:schoolName")
     .put(schoolCrudControllers.updateSchool)

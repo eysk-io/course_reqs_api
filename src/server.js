@@ -22,11 +22,11 @@ app.use(morgan("dev"));
 // app.post("/signup", signup);
 // app.post("/signin", signin);
 
-app.use("/api/school", schoolRouterUnprotected);
-app.use("/api/school", protect, schoolRouterProtected);
+app.use("/school", schoolRouterUnprotected);
+app.use("/school", protect, schoolRouterProtected);
 
-app.use("/api/course", courseRouterUnprotected);
-app.use("/api/course", protect, courseRouterProtected);
+app.use("/course", courseRouterUnprotected);
+app.use("/course", protect, courseRouterProtected);
 
 app.use((error, req, res, next) => {
   return res.status(500).json({ error: error.toString() });
@@ -36,7 +36,7 @@ export const start = async () => {
   try {
     await connect();
     app.listen(config.port, () => {
-      console.log(`Course Req API on ${config.port}/api`);
+      console.log(`Course Req API on ${config.port}`);
     });
   } catch (e) {
     console.error(e);
