@@ -32,6 +32,11 @@ app.use((error, req, res, next) => {
   return res.status(500).json({ error: error.toString() });
 });
 
+app.get('/', (req, res) => {
+  const docsUrl = "https://course-reqs.notion.site/course-reqs/Course-Reqs-560a1df7302a4a358fb14b7196b1d52d"
+  res.send(`Welcome to the Course Reqs API! For more information, check out the detailed <a href="${docsUrl}">documentation</a>.`);
+});
+
 export const start = async () => {
   try {
     await connect();
