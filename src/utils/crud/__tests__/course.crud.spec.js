@@ -1641,18 +1641,6 @@ describe("course crud functions", async () => {
                 equivalencies: [],
                 notes: "none"
             });
-            const cpsc103 = await Course.create({
-                subject: "CPSC",
-                code: 103,
-                school: school.name,
-                credits: "3",
-                title: "Introduction to Systematic Program Design",
-                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
-                preRequisites: [],
-                coRequisites: [],
-                equivalencies: [],
-                notes: "none"
-            })
             const expectedCourse = {
                 subject: "CPSC",
                 code: 107,
@@ -1663,20 +1651,7 @@ describe("course crud functions", async () => {
                 preRequisites: [
                     {
                         recommended: [
-                            {
-                                subject: "CPSC",
-                                code: 103,
-                                school: school.name,
-                                title: "Introduction to Systematic Program Design",
-                                description: "Computation as a tool for systematic problem solving in non-computer-science disciplines. Introductory programming skills. Not for credit for students who have credit for, or exemption from, or are concurrently taking CPSC 110 or APSC 160. No programming experience expected.",
-                                credits: "3",
-                                preRequisites: [],
-                                coRequisites: [],
-                                equivalencies: [],
-                                notes: "none",
-                                __v: 0,
-                                _id: cpsc103._id
-                            }
+                            "CPSC 103"
                         ]
                     }
                 ],
