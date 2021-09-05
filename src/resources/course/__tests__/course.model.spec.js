@@ -40,10 +40,9 @@ describe("course model", () => {
         test("credits", () => {
             const credits = Course.schema.obj.credits
             expect(credits).toEqual({
-                type: Number,
+                type: String,
                 required: true,
-                trim: true,
-                maxlength: 2
+                trim: true
             })
         })
         test("school", () => {

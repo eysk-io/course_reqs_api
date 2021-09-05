@@ -30,10 +30,9 @@ const courseSchema = new mongoose.Schema(
             required: true
         },
         credits: {
-            type: Number,
+            type: String,
             required: true,
-            trim: true,
-            maxlength: 2
+            trim: true
         },
         // for both pre- and co-requisites, can have the following structures:
         // [String] -> i.e. ["CPSC 310", "CPSC 221", ...]
