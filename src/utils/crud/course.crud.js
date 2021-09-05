@@ -286,7 +286,7 @@ const getCourseHelper = (courseModel, schoolModel) => async (schoolId, courseReq
             title: courseRequisite,
             code: -1,
             credits: "",
-            school: schoolId,
+            school: "",
             __v: 0
         }
         return courseObj;

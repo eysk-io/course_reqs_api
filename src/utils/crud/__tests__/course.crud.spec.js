@@ -1588,7 +1588,7 @@ describe("course crud functions", async () => {
                                 subject: "",
                                 code: -1,
                                 credits: "",
-                                school: school.name,
+                                school: "",
                                 preRequisites: [],
                                 coRequisites: [],
                                 equivalencies: [],
