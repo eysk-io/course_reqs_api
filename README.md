@@ -1,16 +1,16 @@
 # :books: Course Reqs Backend API
 
-<!-- <p align="center">
-  <img alt="License" src="https://img.shields.io/github/license/eyskim/course_reqs_scraper">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/eyskim/course_reqs_scraper">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/eyskim/course_reqs_scraper">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/eyskim/course_reqs_scraper">
-  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/eyskim/course_reqs_scraper">
+<p align="center">
+  <img alt="License" src="https://img.shields.io/github/license/eyskim/course_reqs_api">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/eyskim/course_reqs_api">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/eyskim/course_reqs_api">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/eyskim/course_reqs_api">
+  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/eyskim/course_reqs_api">
 </p>
 
 <p align="center">
   <img alt="GitHub followers" src="https://img.shields.io/github/followers/eyskim?style=social">
-</p> -->
+</p>
 
 General-purpose API backend for the pre-requisite chain of specified courses at post-secondary institutions. In-depth documentation can be found at: https://course-reqs.notion.site/course-reqs/Course-Reqs-560a1df7302a4a358fb14b7196b1d52d.
 
