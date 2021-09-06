@@ -1,4 +1,4 @@
-# :books: Course Reqs Backend API
+# :books: Course Reqs API Backend
 
 <p align="center">
   <img alt="License" src="https://img.shields.io/github/license/eyskim/course_reqs_api">
