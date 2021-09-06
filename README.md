@@ -41,6 +41,16 @@ npm run build
 npm start
 ```
 
+### Testing
+
+The application depends on `jest` (https://jestjs.io/) for its unit tests. To run:
+
+```shell
+npm run test
+```
+
+(Eventually commands to run specific test suites will be added)
+
 ### Upcoming
 
 See: https://github.com/eyskim/course_reqs_api/issues for current development efforts.
