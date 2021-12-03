@@ -8,6 +8,7 @@ import schoolRouterUnprotected from "./resources/school/school.router.unprotecte
 import schoolRouterProtected from "./resources/school/school.router.protected";
 import courseRouterUnprotected from "./resources/course/course.router.unprotected";
 import courseRouterProtected from "./resources/course/course.router.protected";
+import reviewRouterUnprotected from "./resources/review/review.router.unprotected";
 import { signup, signin, protect } from "./utils/auth";
 
 export const app = express();
@@ -27,6 +28,8 @@ app.use("/school", protect, schoolRouterProtected);
 
 app.use("/course", courseRouterUnprotected);
 app.use("/course", protect, courseRouterProtected);
+
+app.use("/review", reviewRouterUnprotected);
 
 app.use((error, req, res, next) => {
   return res.status(500).json({ error: error.toString() });
