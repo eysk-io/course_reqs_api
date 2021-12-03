@@ -70,8 +70,8 @@ export const createCourseIndex = (reviewModel, reviewIndexModel) => async (req, 
             })
             .lean()
             .exec();
-        req.body.subject = req.params.subject.toUpperCase()
-        req.body.code = parseInt(req.params.courseCode)
+        req.body.reviewSubject = req.params.subject.toUpperCase()
+        req.body.reviewCode = parseInt(req.params.courseCode)
         if (!reviewIndexDoc) {
             const doc = await reviewIndexModel.create({ ...req.body });
             return res.status(201).json({ data: doc });
