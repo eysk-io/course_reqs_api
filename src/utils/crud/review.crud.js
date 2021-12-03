@@ -35,6 +35,13 @@ export const createCourseReview = (reviewModel, reviewIndexModel) => async (req,
         }
         req.body.courseId = reviewIndexDoc._id;
         const doc = await reviewModel.create({ ...req.body });
+        await reviewIndexModel.update({
+            reviewSubject: (req.params.subject).toUpperCase(),
+            reviewCode: parseInt(req.params.courseCode),
+            lastUpdatedDay: 3,
+            lastUpdatedMonth: 11,
+            lastUpdatedYear: 2021
+        })
         return res.status(201).json({ data: doc });
     } catch (e) {
         console.error(e);
