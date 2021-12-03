@@ -35,7 +35,7 @@ export const createCourseReview = (reviewModel, reviewIndexModel) => async (req,
         }
         req.body.courseId = reviewIndexDoc._id;
         const doc = await reviewModel.create({ ...req.body });
-        await reviewIndexModel.update({
+        await reviewIndexModel.findOneAndUpdate({
             reviewSubject: (req.params.subject).toUpperCase(),
             reviewCode: parseInt(req.params.courseCode),
             lastUpdatedDay: 3,
@@ -83,7 +83,7 @@ export const createCourseIndex = (reviewModel, reviewIndexModel) => async (req, 
             const doc = await reviewIndexModel.create({ ...req.body });
             return res.status(201).json({ data: doc });
         } else {
-            const doc = await reviewIndexModel.update({ ...req.body });
+            const doc = await reviewIndexModel.findOneAndUpdate({ ...req.body });
             return res.status(201).json({ data: doc });
         }
     } catch (e) {
