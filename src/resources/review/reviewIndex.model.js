@@ -29,12 +29,10 @@ const reviewIndexSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
+    },
+    {
+        collection: "reviewIndex"
     }
-);
-
-reviewIndexSchema.index(
-    { reviewSubject: 1, reviewCode: 1 },
-    { unique: true }
 );
 
 export const ReviewIndex = mongoose.model("reviewIndex", reviewIndexSchema);
