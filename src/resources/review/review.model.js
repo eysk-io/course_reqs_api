@@ -12,6 +12,9 @@ const reviewSchema = new mongoose.Schema(
             required: true,
             trim: true
         }
+    },
+    {
+        collection: "review"
     }
 );
 
