@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const reviewIndexSchema = new mongoose.Schema(
     {
-        subject: {
+        reviewSubject: {
             type: String,
             required: true,
             trim: true,
             maxlength: 5
         },
-        code: {
+        reviewCode: {
             type: Number,
             required: true,
             trim: true,

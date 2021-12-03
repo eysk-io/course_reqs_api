@@ -2,8 +2,8 @@ export const getAllCourseReviews = (reviewModel, reviewIndexModel) => async (req
     try {
         const reviewIndexDoc = await reviewIndexModel
             .findOne({
-                subject: (req.params.subject).toUpperCase(),
-                code: parseInt(req.params.courseCode)
+                reviewSubject: (req.params.subject).toUpperCase(),
+                reviewCode: parseInt(req.params.courseCode)
             })
             .lean()
             .exec();
@@ -25,8 +25,8 @@ export const createCourseReview = (reviewModel, reviewIndexModel) => async (req,
     try {
         const reviewIndexDoc = await reviewIndexModel
             .findOne({
-                subject: (req.params.subject).toUpperCase(),
-                code: parseInt(req.params.courseCode)
+                reviewSubject: (req.params.subject).toUpperCase(),
+                reviewCode: parseInt(req.params.courseCode)
             })
             .lean()
             .exec();
@@ -46,8 +46,8 @@ export const getCourseIndex = (reviewModel, reviewIndexModel) => async (req, res
     try {
         const reviewIndexDoc = await reviewIndexModel
             .findOne({
-                subject: (req.params.subject).toUpperCase(),
-                code: parseInt(req.params.courseCode)
+                reviewSubject: (req.params.subject).toUpperCase(),
+                reviewCode: parseInt(req.params.courseCode)
             })
             .lean()
             .exec();
@@ -65,8 +65,8 @@ export const createCourseIndex = (reviewModel, reviewIndexModel) => async (req, 
     try {
         const reviewIndexDoc = await reviewIndexModel
             .findOne({
-                subject: (req.params.subject).toUpperCase(),
-                code: parseInt(req.params.courseCode)
+                reviewSubject: (req.params.subject).toUpperCase(),
+                reviewCode: parseInt(req.params.courseCode)
             })
             .lean()
             .exec();
