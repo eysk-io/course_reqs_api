@@ -33,8 +33,6 @@ export const createCourseReview = (reviewModel, reviewIndexModel) => async (req,
         if (!reviewIndexDoc) {
             return res.status(404).end();
         }
-        console.log("req.body:");
-        console.log(req.body);
         req.body.courseId = reviewIndexDoc._id;
         const doc = await reviewModel.create({ ...req.body });
         const d = new Date()
