@@ -4,12 +4,10 @@ const reviewSchema = new mongoose.Schema(
     {
         courseId: {
             type: String,
-            required: true,
             trim: true
         },
         review: {
             type: String,
-            required: true,
             trim: true
         }
     },
